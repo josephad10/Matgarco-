@@ -1,0 +1,40 @@
+{
+  "name": "matgarco-storefront",
+  "version": "1.0.0",
+  "description": "Matgarco Storefront - Customer Shopping Experience",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3001",
+    "build": "next build",
+    "start": "next start -p 3001",
+    "lint": "next lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "next": "^14.1.0",
+    "axios": "^1.6.5",
+    "zod": "^3.22.4",
+    "zustand": "^4.4.7",
+    "lucide-react": "^0.309.0",
+    "clsx": "^2.1.0",
+    "react-hook-form": "^7.49.3",
+    "@hookform/resolvers": "^3.3.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.8",
+    "@types/react": "^18.2.47",
+    "@types/react-dom": "^18.2.18",
+    "typescript": "^5.3.3",
+    "tailwindcss": "^3.4.1",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.33",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "^14.1.0",
+    "prettier": "^3.1.1"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

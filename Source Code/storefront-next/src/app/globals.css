@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CSS Variable defaults (overridden by theme engine) ─── */
+:root {
+  --color-primary:     #3B82F6;
+  --color-secondary:   #1E40AF;
+  --color-background:  #F8FAFC;
+  --color-surface:     #FFFFFF;
+  --color-text:        #111827;
+  --color-text-muted:  #6B7280;
+  --color-accent:      #10B981;
+  --color-border:      #E5E7EB;
+  --font-heading:      'Cairo', sans-serif;
+  --font-body:         'Cairo', sans-serif;
+  --font-base-size:    16px;
+}
+
+/* ─── Base ─── */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-size: var(--font-base-size);
+  font-family: var(--font-body);
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  min-height: 100vh;
+}
+
+/* ─── Smooth scroll ─── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ─── Scrollbar (subtle) ─── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+
+/* ─── Utilities ─── */
+.theme-primary    { color: var(--color-primary); }
+.theme-bg-primary { background-color: var(--color-primary); }
+.theme-border     { border-color: var(--color-border); }
+.theme-surface    { background-color: var(--color-surface); }
+.theme-muted      { color: var(--color-text-muted); }
