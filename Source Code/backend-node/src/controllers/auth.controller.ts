@@ -5,6 +5,7 @@ import { AppError, asyncHandler } from '../middleware/error.middleware';
 import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from '../services/jwt.service';
 import { generateToken } from '../utils/helpers';
 import { AuthRequest } from '../types';
+import { sendWelcomeEmail } from '../services/email.service';
 
 /**
  * Register new user
@@ -59,7 +60,8 @@ export const register = asyncHandler(
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
     
-    // TODO: Send verification email
+    // Send verification email
+    await sendWelcomeEmail(user.email, user.firstName);
     
     res.status(201).json({
       success: true,

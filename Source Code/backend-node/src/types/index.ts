@@ -40,6 +40,12 @@ export interface AuthRequest extends Request {
     permissions?: Record<string, boolean>;
     staffRole?: string;
   };
+  /**
+   * Verified tenant identifier — set exclusively by `enforceTenantScope`.
+   * Controllers must read from here rather than from req.user.merchantId
+   * or req.body.merchantId to guarantee tenant integrity.
+   */
+  merchantId?: string;
 }
 
 // JWT Payload

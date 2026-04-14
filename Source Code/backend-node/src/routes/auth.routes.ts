@@ -12,6 +12,7 @@ import {
   resetPassword,
 } from '../controllers/auth.controller';
 import { authenticate } from '../middleware/auth.middleware';
+import { authLimiter } from '../middleware/rateLimiter.middleware';
 import { validate } from '../middleware/validation.middleware';
 import { z } from 'zod';
 import { emailSchema, passwordSchema } from '../utils/validators';
@@ -56,15 +57,15 @@ const resetPasswordSchema = z.object({
 });
 
 // Routes
-router.post('/register', validate(registerSchema), register);
-router.post('/login', validate(loginSchema), login);
+router.post('/register', authLimiter, validate(registerSchema), register);
+router.post('/login', authLimiter, validate(loginSchema), login);
 router.post('/refresh', refreshAccessToken);
 router.post('/logout', authenticate, logout);
 router.get('/me', authenticate, getCurrentUser);
 router.patch('/me', authenticate, updateProfile);
 router.post('/change-password', authenticate, changePassword);
 router.post('/verify-email', validate(verifyEmailSchema), verifyEmail);
-router.post('/forgot-password', validate(forgotPasswordSchema), forgotPassword);
-router.post('/reset-password', validate(resetPasswordSchema), resetPassword);
+router.post('/forgot-password', authLimiter, validate(forgotPasswordSchema), forgotPassword);
+router.post('/reset-password', authLimiter, validate(resetPasswordSchema), resetPassword);
 
 export default router;

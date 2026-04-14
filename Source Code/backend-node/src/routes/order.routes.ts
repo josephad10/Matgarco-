@@ -9,6 +9,7 @@ import {
   updateTracking,
 } from '../controllers/order.controller';
 import { authenticate } from '../middleware/auth.middleware';
+import { checkoutLimiter } from '../middleware/rateLimiter.middleware';
 import { tenantIsolation } from '../middleware/tenantIsolation.middleware';
 import { validate } from '../middleware/validation.middleware';
 import { z } from 'zod';
@@ -76,6 +77,7 @@ const updatePaymentSchema = z.object({
 // Public route (storefront checkout)
 router.post(
   '/',
+  checkoutLimiter,
   validate(createOrderSchema),
   createOrder
 );

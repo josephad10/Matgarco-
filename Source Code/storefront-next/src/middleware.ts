@@ -15,9 +15,12 @@ import type { NextRequest } from 'next/server';
  * The /store/* routes are always available directly too.
  */
 
-// Routes that belong to the Next.js app itself, NOT store subdomains
+// Routes that belong to the Next.js app itself, NOT store subdomains.
+// Also doubles as the canonical blocklist for store slug registration.
 const RESERVED_PATHS = new Set([
   'store', 'api', '_next', 'favicon.ico',
+  // Infrastructure subdomains that must never resolve to a merchant store
+  'www', 'app', 'cdn', 'mail', 'smtp', 'admin', 'static', 'm',
 ]);
 
 export function middleware(request: NextRequest) {
@@ -54,15 +57,25 @@ export function middleware(request: NextRequest) {
   let subdomain = '';
 
   for (const root of rootDomains) {
-    if (hostWithoutPort.endsWith(`.${root}`) || hostWithoutPort.includes(`.${root}`)) {
-      subdomain = hostWithoutPort.replace(`.${root}`, '').split('.').pop() || '';
+    // Anchor match to the END of the hostname so that a host like
+    // "api.stores.matgarco.com" never resolves "stores" as the tenant.
+    // The regex captures ONLY the single leftmost label that precedes
+    // the root, e.g.: "mystore.matgarco.com" → "mystore".
+    const anchoredRootRE = new RegExp(`^([a-z0-9][a-z0-9-]*)\.${root.replace('.', '\\.')}$`);
+    const match = hostWithoutPort.match(anchoredRootRE);
+    if (match) {
+      subdomain = match[1]; // exactly one label — no multi-part leakage
       break;
     }
   }
 
-  if (subdomain && subdomain !== 'www' && subdomain !== 'app' && subdomain !== 'api') {
+  // Normalise: lowercase the pathname BEFORE any RESERVED_PATHS or slug
+  // checks so that mixed-case paths like "/Store/demo" are caught.
+  url.pathname = url.pathname.toLowerCase();
+
+  if (subdomain && !RESERVED_PATHS.has(subdomain)) {
     requestHeaders.set('x-subdomain', subdomain);
-    
+
     // Already under /store/* — skip rewrite but still attach headers
     if (url.pathname.startsWith('/store/')) {
       return buildResponse(NextResponse.next({ request: { headers: requestHeaders } }), subdomain);
@@ -76,9 +89,18 @@ export function middleware(request: NextRequest) {
   // ── 2. Path-based routing (e.g. /demo-store → /store/demo-store) ──
   if (!url.pathname.startsWith('/store/')) {
     const segments = url.pathname.split('/').filter(Boolean);
-    const firstSegment = segments[0];
 
-    if (firstSegment && !RESERVED_PATHS.has(firstSegment) && /^[a-z0-9][a-z0-9-]{1,48}[a-z0-9]$/.test(firstSegment)) {
+    // Normalize to lowercase so "/Demo-Store" matches the same slug as
+    // "/demo-store" (pathname was already lowercased above).
+    const firstSegment = (segments[0] || '').toLowerCase();
+
+    // Regex allows 1-char minimum (e.g. "a") up to 50 chars:
+    //   ^[a-z0-9]([a-z0-9-]{0,48}[a-z0-9])?$
+    // Breakdown:
+    //   [a-z0-9]                 — mandatory first char (no leading hyphen)
+    //   ([a-z0-9-]{0,48}[a-z0-9])? — optional body + last char (no trailing hyphen)
+    // This correctly accepts 1-char ("a"), 2-char ("eg"), and up to 50-char slugs.
+    if (firstSegment && !RESERVED_PATHS.has(firstSegment) && /^[a-z0-9]([a-z0-9-]{0,48}[a-z0-9])?$/.test(firstSegment)) {
       requestHeaders.set('x-subdomain', firstSegment);
       const rewrittenUrl = url.clone();
       rewrittenUrl.pathname = `/store${url.pathname}`;

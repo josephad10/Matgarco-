@@ -53,14 +53,7 @@ export const errorHandler = (
   }
 
   // Send error response
-  res.status(statusCode).json({
-    success: false,
-    error: message,
-    ...(process.env.NODE_ENV === 'development' && {
-      stack: err.stack,
-      details: err.message,
-    }),
-  });
+  res.status(statusCode).json({ success: false, error: message, details: (err as any).details || null });
 };
 
 // Async handler wrapper

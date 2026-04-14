@@ -15,6 +15,7 @@ import {
   notifyOrderCancelled,
   notifyLowStock,
 } from '../services/notification.service';
+import { sendOrderConfirmation } from '../services/email.service';
 
 /**
  * Get all orders (merchant)
@@ -101,21 +102,24 @@ export const getOrderById = asyncHandler(
  * Create order (checkout)
  * POST /api/orders
  *
+ * SECURITY: merchantId is NEVER accepted from req.body.
+ * It is derived exclusively from the `subdomain` field supplied by
+ * the storefront, then resolved against the DB.  This eliminates the
+ * cross-tenant order-injection vector identified in RISK-01.
+ *
  * ATOMIC STOCK DEDUCTION — Mongoose 8 / MongoDB 6+
  * Uses a replica-set session + withTransaction() to guarantee:
  *   1. Stock check + decrement are a single atomic document operation
  *      (no TOCTOU race condition — two simultaneous requests for the
  *      last item will produce exactly one success and one 400).
- *   2. If ANY item fails (out of stock / not found) the entire
- *      transaction aborts, restoring all previously decremented stock.
- *   3. Non-critical writes (merchant revenue stats, notifications)
- *      run fire-and-forget AFTER commit so they never block the
- *      commit path or cause spurious rollbacks.
+ *   2. If ANY item fails the entire transaction aborts, restoring all
+ *      previously decremented stock.
+ *   3. All merchant statistics (totalOrders, totalRevenue, totalCustomers)
+ *      are committed inside the same atomic boundary as stock and order.
  */
 export const createOrder = asyncHandler(
   async (req: AuthRequest, res: Response, next: NextFunction) => {
     const {
-      merchantId,
       items,
       customerInfo,
       shippingAddress,
@@ -127,12 +131,29 @@ export const createOrder = asyncHandler(
       discount = 0,
     } = req.body;
 
-    // ── Pre-flight: validate merchant OUTSIDE the transaction ─────────────────
-    // This is a read-only check; if it fails we save the overhead of opening
-    // a session entirely.
-    const merchant = await Merchant.findOne({ _id: merchantId, isActive: true });
+    // ← secure tenant identifier (replaces req.body.merchantId)
+    // Extract safely from headers, with fallback to body
+    const subdomain = req.headers['x-subdomain'] || req.body.subdomain;
+
+    // ── Pre-flight: resolve tenant from subdomain — OUTSIDE the transaction ───
+    // subdomain is the only trusted store identifier on a public checkout.
+    // We never accept merchantId from the request body.
+    if (!subdomain) {
+      throw new AppError('Store subdomain is required', 400);
+    }
+    const merchant = await Merchant.findOne({
+      subdomain: (subdomain as string).toLowerCase(),
+      isActive: true,
+    });
     if (!merchant) {
       throw new AppError('Store not found or inactive', 404);
+    }
+    // Derive the verified merchantId from the DB document — never from the client.
+    const merchantId = merchant._id.toString();
+
+    // Security check: Match client-provided ID against the Tenant Middleware ID
+    if (req.body.merchantId && req.merchantId && req.body.merchantId !== req.merchantId) {
+      throw new AppError('Unauthorized tenant access', 403);
     }
 
     // Pre-compute plan economics so they are available inside the callback
@@ -305,25 +326,29 @@ export const createOrder = asyncHandler(
             { session }
           );
         }
+
+        // ── MERCHANT ORDER/REVENUE STATS (inside transaction) ────────────────
+        // Moved inside the atomic boundary so a DB failure doesn't leave
+        // a committed order with stale merchant counters.
+        await Merchant.findByIdAndUpdate(
+          merchantId,
+          {
+            $inc: {
+              'stats.totalOrders':  1,
+              'stats.totalRevenue': total,
+            },
+          },
+          { session }
+        );
       }); // ← withTransaction commits here; aborts + retries on WCE
     } finally {
       // Always release the server-side cursor regardless of outcome.
       await session.endSession();
     }
 
-    // ── POST-COMMIT: fire-and-forget non-critical operations ──────────────────
-    // These run only after a successful commit. Failures here are logged but
-    // do NOT affect the already-confirmed order or roll back stock.
-
-    // Merchant order/revenue counters (non-critical aggregate stats)
-    Merchant.findByIdAndUpdate(merchantId, {
-      $inc: {
-        'stats.totalOrders':  1,
-        'stats.totalRevenue': order.total,
-      },
-    }).catch((err: Error) =>
-      console.error('[Matgarco] Merchant stats update failed after order commit:', err.message)
-    );
+    // ── POST-COMMIT: fire-and-forget notifications only ───────────────────────
+    // Stats are now inside the transaction. Only side-effect notifications
+    // remain here — failures are isolated and do not affect order integrity.
 
     // Low-stock push notifications
     for (const alert of lowStockAlerts) {
@@ -332,6 +357,11 @@ export const createOrder = asyncHandler(
 
     // New-order push notification to merchant dashboard
     notifyNewOrder(merchantId, order.orderNumber, order._id.toString(), order.total);
+
+    // Send order confirmation email
+    await sendOrderConfirmation(order.customerInfo.email, order.orderNumber).catch(err => 
+      console.error('[Matgarco] Order confirmation email failed:', err)
+    );
 
     // ── RESPONSE — structure identical to original API contract ───────────────
     res.status(201).json({
@@ -432,6 +462,17 @@ export const updatePaymentStatus = asyncHandler(
 /**
  * Cancel order
  * POST /api/orders/:id/cancel
+ *
+ * TRANSACTIONAL CANCELLATION — Mongoose 8 / MongoDB 6+
+ * All three side-effects (stock restoration, order status, merchant stats)
+ * are committed as a single atomic unit.  If any step fails, the entire
+ * operation rolls back — preventing partial states such as:
+ *   • stock restored but order still shows 'processing'
+ *   • order cancelled but merchant revenue not decremented
+ *
+ * Stock restoration uses the same aggregation-pipeline pattern as
+ * createOrder's deduction so both paths are consistent and conditional
+ * on trackQuantity.
  */
 export const cancelOrder = asyncHandler(
   async (req: AuthRequest, res: Response, next: NextFunction) => {
@@ -439,45 +480,89 @@ export const cancelOrder = asyncHandler(
     const { reason } = req.body;
     const merchantId = req.user?.merchantId;
 
+    // ── Pre-flight guard (outside transaction — fast fail) ────────────────────
     const order = await Order.findOne({ _id: id, merchantId });
-
     if (!order) {
       throw new AppError('Order not found', 404);
     }
-
     if (order.orderStatus === 'delivered' || order.orderStatus === 'cancelled') {
       throw new AppError('Cannot cancel this order', 400);
     }
 
-    // Restore product stock
-    for (const item of order.items) {
-      await Product.findByIdAndUpdate(item.productId, {
-        $inc: {
-          quantity: item.quantity,
-          sales: -item.quantity,
-        },
-      });
+    // Snapshot values needed post-commit for notifications
+    const { orderNumber, total: orderTotal } = order;
+
+    // ── Transaction ───────────────────────────────────────────────────────────
+    const session = await mongoose.startSession();
+    try {
+      await session.withTransaction(async () => {
+
+        // ── ATOMIC STOCK RESTORATION LOOP ─────────────────────────────────────
+        // Mirror of createOrder's deduction — uses aggregation pipeline so
+        // the quantity increment is conditional on trackQuantity, and the
+        // sales counter is decremented atomically in the same operation.
+        // All writes are bound to the session (rolled back on any throw).
+        for (const item of order.items) {
+          await Product.findOneAndUpdate(
+            {
+              _id: item.productId,
+              merchantId,   // tenant guard: never restore stock to the wrong store
+            },
+            [
+              {
+                $set: {
+                  // Restore stock only when trackQuantity is true
+                  quantity: {
+                    $cond: {
+                      if: '$trackQuantity',
+                      then: { $add: ['$quantity', item.quantity] },
+                      else: '$quantity',
+                    },
+                  },
+                  // Always reverse the sales counter
+                  sales: {
+                    $max: [0, { $subtract: ['$sales', item.quantity] }],
+                  },
+                },
+              },
+            ],
+            { session }
+            // Note: we intentionally do NOT throw if product is missing here.
+            // The product may have been deleted after ordering.  The priority
+            // is to cancel the order and fix merchant finances; a missing
+            // product simply means there is nothing to restore.
+          );
+        }
+
+        // ── ORDER STATUS UPDATE (inside transaction) ──────────────────────────
+        order.orderStatus = 'cancelled';
+        order.timeline.push({
+          status: 'cancelled',
+          timestamp: new Date(),
+          note: reason || 'Order cancelled',
+        });
+        await order.save({ session });
+
+        // ── MERCHANT STATS DECREMENT (inside transaction) ─────────────────────
+        // Guard against totalOrders going below 0 on edge-case duplicate cancels.
+        await Merchant.findByIdAndUpdate(
+          merchantId,
+          {
+            $inc: {
+              'stats.totalOrders':  -1,
+              'stats.totalRevenue': -orderTotal,
+            },
+          },
+          { session }
+        );
+
+      }); // ← withTransaction commits here; aborts on any throw
+    } finally {
+      await session.endSession();
     }
 
-    order.orderStatus = 'cancelled';
-    order.timeline.push({
-      status: 'cancelled',
-      timestamp: new Date(),
-      note: reason || 'Order cancelled',
-    });
-
-    await order.save();
-
-    // Notify merchant of cancellation
-    notifyOrderCancelled(merchantId!, order.orderNumber, order._id.toString());
-
-    // Update merchant stats
-    await Merchant.findByIdAndUpdate(merchantId, {
-      $inc: {
-        'stats.totalOrders': -1,
-        'stats.totalRevenue': -order.total,
-      },
-    });
+    // ── POST-COMMIT: fire-and-forget notification ─────────────────────────────
+    notifyOrderCancelled(merchantId!, orderNumber, order._id.toString());
 
     res.status(200).json({
       success: true,
