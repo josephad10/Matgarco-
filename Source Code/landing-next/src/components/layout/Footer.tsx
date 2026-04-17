@@ -8,11 +8,11 @@ export function Footer() {
   const { t } = useLanguage();
 
   return (
-    <footer className="bg-slate-50 pt-20 pb-10 border-t border-slate-200">
+    <footer className="bg-white pt-20 pb-10 border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
         <div className="col-span-1 md:col-span-1">
           <Link href="/" className="inline-block mb-6">
-            <Image src="/logo.png" alt="Matgarco Logo" width={140} height={45} className="object-contain" />
+            <Image src="/logo.svg" alt="Matgarco Logo" width={140} height={45} className="object-contain" />
           </Link>
           <p className="text-slate-500 leading-relaxed mb-6">{t.footer.description}</p>
         </div>

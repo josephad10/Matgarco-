@@ -47,7 +47,7 @@ export function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 relative z-50">
           <Image
-            src="/logo.png"
+            src="/logo.svg"
             alt="Matgarco Logo"
             width={140}
             height={30}
