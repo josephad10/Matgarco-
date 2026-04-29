@@ -12,7 +12,7 @@ import { SUBSCRIPTION_PLANS } from '../utils/constants';
  * POST /api/merchants
  */
 export const createMerchant = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, _next: NextFunction) => {
     const { name, storeName, subdomain, description } = req.body;
     const userId = req.user?.userId;
 
@@ -97,7 +97,7 @@ export const createMerchant = asyncHandler(
  * GET /api/merchants/:id
  */
 export const getMerchantById = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, _next: NextFunction) => {
     const { id } = req.params;
 
     const merchant = await Merchant.findById(id).populate('ownerId', 'firstName lastName email');
@@ -118,7 +118,7 @@ export const getMerchantById = asyncHandler(
  * GET /api/merchants/subdomain/:subdomain
  */
 export const getMerchantBySubdomain = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, _next: NextFunction) => {
     const { subdomain } = req.params;
 
     const merchant = await Merchant.findOne({ 
@@ -153,7 +153,7 @@ export const getMerchantBySubdomain = asyncHandler(
  * PATCH /api/merchants/:id
  */
 export const updateMerchant = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, _next: NextFunction) => {
     const { id } = req.params;
     const updates = req.body;
 
@@ -187,7 +187,7 @@ export const updateMerchant = asyncHandler(
  * GET /api/merchants/:id/stats
  */
 export const getMerchantStats = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, _next: NextFunction) => {
     const { id } = req.params;
 
     const merchant = await Merchant.findById(id);
@@ -217,7 +217,7 @@ export const getMerchantStats = asyncHandler(
  * GET /api/merchants/check-subdomain/:subdomain
  */
 export const checkSubdomainAvailability = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, _next: NextFunction) => {
     const { subdomain } = req.params;
 
     // Validate format
@@ -250,7 +250,7 @@ export const checkSubdomainAvailability = asyncHandler(
  * POST /api/merchants/:id/complete-onboarding
  */
 export const completeOnboarding = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, _next: NextFunction) => {
     const { id } = req.params;
 
     const merchant = await Merchant.findByIdAndUpdate(
@@ -278,7 +278,7 @@ export const completeOnboarding = asyncHandler(
  * GET /api/merchants
  */
 export const getAllMerchants = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, _next: NextFunction) => {
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
     const skip = (page - 1) * limit;
@@ -322,7 +322,7 @@ export const getAllMerchants = asyncHandler(
  * POST /api/merchants/:id/suspend
  */
 export const suspendMerchant = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, _next: NextFunction) => {
     const { id } = req.params;
     const { reason } = req.body;
 
@@ -353,7 +353,7 @@ export const suspendMerchant = asyncHandler(
  * POST /api/merchants/:id/activate
  */
 export const activateMerchant = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, _next: NextFunction) => {
     const { id } = req.params;
 
     const merchant = await Merchant.findByIdAndUpdate(
@@ -377,3 +377,4 @@ export const activateMerchant = asyncHandler(
     });
   }
 );
+

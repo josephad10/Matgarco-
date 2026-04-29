@@ -1,8 +1,8 @@
 "use client";
 
 import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
-import { MegaCTA } from "@/components/sections/MegaCTA";
+import { GlobalFooter } from "@/components/sections/GlobalFooter";
+
 import { Button } from "@/components/ui/Button";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
@@ -132,9 +132,9 @@ export default function SolutionsPage() {
           </div>
         </section>
 
-        <MegaCTA />
+        
       </main>
-      <Footer />
+      <GlobalFooter />
     </div>
   );
 }

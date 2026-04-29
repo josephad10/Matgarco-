@@ -311,6 +311,9 @@ const orderSchema = new Schema<IOrder>(
   }
 );
 
+// Compound index for optimized merchant dashboard analytics and reporting
+orderSchema.index({ merchantId: 1, orderStatus: 1, createdAt: -1 });
+
 // Add initial timeline event
 orderSchema.pre('save', function (next) {
   if (this.isNew) {

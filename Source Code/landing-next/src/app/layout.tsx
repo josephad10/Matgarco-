@@ -16,8 +16,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Matgarco | المنصة الأذكى للتجارة الإلكترونية",
-  description: "أنشئ متجرك الاحترافي بدقائق بدون خبرة برمجية. نظام مدفوعات وشحن متكامل ينقل تجارتك لمستوى آخر.",
+  title: "Matgarco | The Autonomous E-commerce Engine",
+  description: "Launch your enterprise-grade storefront globally with Matgarco. Zero code, real-time sync, and ultimate scalability.",
+  icons: {
+    icon: "/icon.jpg",
+  },
 };
 
 export default function RootLayout({
@@ -26,8 +29,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ar" dir="rtl" className={`${tajawal.variable} ${inter.variable}`}>
-      <body className="font-sans antialiased min-h-screen bg-white text-slate-900">
+    <html lang="ar" dir="rtl" className={`dark ${tajawal.variable} ${inter.variable}`} suppressHydrationWarning>
+      <body className="font-sans antialiased min-h-screen bg-[#050505] text-[#f8fafc] transition-colors duration-300" suppressHydrationWarning>
         <LanguageProvider>
           {children}
         </LanguageProvider>

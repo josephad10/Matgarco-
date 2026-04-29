@@ -2,6 +2,21 @@ import mongoose, { Document, Schema } from 'mongoose';
 import bcrypt from 'bcryptjs';
 import { UserRole } from '../types';
 
+import { z } from 'zod';
+
+// Define strict permissions schema with exactly allowed keys
+export const UserPermissionsSchema = z.object({
+  view_orders: z.boolean().optional(),
+  manage_products: z.boolean().optional(),
+  manage_customers: z.boolean().optional(),
+  manage_staff: z.boolean().optional(),
+  manage_settings: z.boolean().optional(),
+  delete_store: z.boolean().optional(),
+  view_reports: z.boolean().optional(),
+  process_payouts: z.boolean().optional(),
+  edit_theme: z.boolean().optional(),
+}).strict(); // Block extra keys
+
 export interface IUser extends Document {
   email: string;
   password: string;
@@ -16,7 +31,7 @@ export interface IUser extends Document {
   // Staff
   staffRole?: string;        // template: 'owner' | 'manager' | 'staff' | 'accountant' | custom
   staffRoleLabel?: string;   // display name (custom label)
-  permissions?: Record<string, boolean>;
+  permissions?: z.infer<typeof UserPermissionsSchema>;
   
   // Relations
   merchantId?: mongoose.Types.ObjectId;
@@ -149,6 +164,18 @@ const userSchema = new Schema<IUser>(
   }
 );
 
+// Permission validation hook
+userSchema.pre('save', function (next) {
+  if (this.permissions && Object.keys(this.permissions).length > 0) {
+    try {
+      UserPermissionsSchema.parse(this.permissions);
+    } catch (error) {
+      return next(new Error(`Invalid permissions: ${error instanceof Error ? error.message : String(error)}`));
+    }
+  }
+  next();
+});
+
 // Hash password before saving
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
@@ -159,8 +186,8 @@ userSchema.pre('save', async function (next) {
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
     next();
-  } catch (error: any) {
-    next(error);
+  } catch (error) {
+    next(error as Error);
   }
 });
 

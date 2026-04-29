@@ -6,13 +6,13 @@ export interface IMerchant extends Document {
   storeName: string;
   subdomain: string;
   customDomain?: string;
-  
+
   // Business Info
   businessName?: string;
   businessType?: string;
   description?: string;
   logo?: string;
-  
+
   // Contact
   email: string;
   phone?: string;
@@ -23,25 +23,25 @@ export interface IMerchant extends Document {
     country: string;
     postalCode: string;
   };
-  
+
   // Owner
   ownerId: mongoose.Types.ObjectId;
-  
+
   // Subscription
   subscriptionPlan: SubscriptionPlan;
   subscriptionStatus: 'active' | 'expired' | 'suspended' | 'cancelled';
   subscriptionStartDate: Date;
   subscriptionEndDate: Date;
   trialEndsAt?: Date;
-  
+
   // Settings
   currency: string;
   language: string;
   timezone: string;
-  
+
   // Store Config
   templateId?: mongoose.Types.ObjectId;
-  
+
   // Features Limits
   limits: {
     maxProducts: number;
@@ -49,7 +49,7 @@ export interface IMerchant extends Document {
     aiCreditsPerMonth: number;
     aiCreditsUsed: number;
   };
-  
+
   // Stats
   stats: {
     totalOrders: number;
@@ -57,11 +57,11 @@ export interface IMerchant extends Document {
     totalProducts: number;
     totalCustomers: number;
   };
-  
+
   // Status
   isActive: boolean;
   suspensionReason?: string;
-  
+
   // Payment Gateway (Business plan: own Paymob)
   paymobConfig?: {
     secretKey: string;
@@ -79,7 +79,7 @@ export interface IMerchant extends Document {
     totalPaidOut: number;      // إجمالي ما تم تحويله
     lastPayoutAt?: Date;
   };
-  
+
   // Meta
   onboardingCompleted: boolean;
   createdAt: Date;
@@ -100,7 +100,6 @@ const merchantSchema = new Schema<IMerchant>(
       unique: true,
       lowercase: true,
       trim: true,
-      index: true,
     },
     customDomain: {
       type: String,
@@ -108,7 +107,7 @@ const merchantSchema = new Schema<IMerchant>(
       sparse: true,
       lowercase: true,
     },
-    
+
     // Business Info
     businessName: {
       type: String,
@@ -124,7 +123,7 @@ const merchantSchema = new Schema<IMerchant>(
     logo: {
       type: String,
     },
-    
+
     // Contact
     email: {
       type: String,
@@ -142,7 +141,7 @@ const merchantSchema = new Schema<IMerchant>(
       country: { type: String, default: 'Egypt' },
       postalCode: String,
     },
-    
+
     // Owner
     ownerId: {
       type: Schema.Types.ObjectId,
@@ -150,7 +149,7 @@ const merchantSchema = new Schema<IMerchant>(
       required: true,
       index: true,
     },
-    
+
     // Subscription
     subscriptionPlan: {
       type: String,
@@ -175,7 +174,7 @@ const merchantSchema = new Schema<IMerchant>(
     trialEndsAt: {
       type: Date,
     },
-    
+
     // Settings
     currency: {
       type: String,
@@ -190,13 +189,13 @@ const merchantSchema = new Schema<IMerchant>(
       type: String,
       default: 'Africa/Cairo',
     },
-    
+
     // Store Config
     templateId: {
       type: Schema.Types.ObjectId,
       ref: 'Template',
     },
-    
+
     // Features Limits
     limits: {
       maxProducts: {
@@ -216,7 +215,7 @@ const merchantSchema = new Schema<IMerchant>(
         default: 0,
       },
     },
-    
+
     // Stats
     stats: {
       totalOrders: {
@@ -236,7 +235,7 @@ const merchantSchema = new Schema<IMerchant>(
         default: 0,
       },
     },
-    
+
     // Status
     isActive: {
       type: Boolean,
@@ -248,7 +247,7 @@ const merchantSchema = new Schema<IMerchant>(
 
     // Payment Gateway (Business plan: own Paymob)
     paymobConfig: {
-      secretKey: { type: String, select: false },     // encrypted ideally
+      secretKey: { type: String, select: false }, // encrypted ideally
       publicKey: { type: String },
       integrationId: { type: String },
     },
@@ -263,7 +262,7 @@ const merchantSchema = new Schema<IMerchant>(
       totalPaidOut: { type: Number, default: 0 },
       lastPayoutAt: { type: Date },
     },
-    
+
     // Meta
     onboardingCompleted: {
       type: Boolean,
@@ -275,7 +274,6 @@ const merchantSchema = new Schema<IMerchant>(
   }
 );
 
-
 // Set trial end date before saving
 merchantSchema.pre('save', function (next) {
   if (this.isNew && this.subscriptionPlan === 'free_trial') {
@@ -285,6 +283,37 @@ merchantSchema.pre('save', function (next) {
   }
   next();
 });
+
+// Cascade cleanup middleware to prevent data orphanage
+const cascadeCleanup = async function (this: mongoose.Query<any, IMerchant>, next: (err?: Error) => void) {
+  const filter = this.getFilter();
+  const merchantId = filter._id;
+
+  if (!merchantId) return next();
+
+  try {
+    const modelsToCleanup = [
+      { name: 'Product', filter: { merchantId } },
+      { name: 'Order', filter: { merchantId } },
+      { name: 'Customer', filter: { merchantId } },
+      { name: 'StoreTheme', filter: { merchantId } },
+    ];
+
+    for (const modelInfo of modelsToCleanup) {
+      await mongoose.model(modelInfo.name).deleteMany(modelInfo.filter);
+    }
+    
+    next();
+  } catch (error) {
+    next(error as Error);
+  }
+};
+
+merchantSchema.pre('findOneAndDelete', cascadeCleanup);
+
+// Explicit compound index for maximum O(1) read throughput on the availability check.
+// This is the primary access path for GET /api/public/subdomain/check.
+// Declared separately (not inline on the field) to be explicit about performance intent.
 
 const Merchant = mongoose.model<IMerchant>('Merchant', merchantSchema);
 

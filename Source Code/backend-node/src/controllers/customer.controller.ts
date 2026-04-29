@@ -8,7 +8,7 @@ import { AuthRequest } from '../types';
  * GET /api/customers
  */
 export const getCustomers = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, _next: NextFunction) => {
     const merchantId = req.user?.merchantId;
 
     if (!merchantId) {
@@ -57,7 +57,7 @@ export const getCustomers = asyncHandler(
  * GET /api/customers/:id
  */
 export const getCustomerById = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, _next: NextFunction) => {
     const { id } = req.params;
     const merchantId = req.user?.merchantId;
 
@@ -79,7 +79,7 @@ export const getCustomerById = asyncHandler(
  * PATCH /api/customers/:id
  */
 export const updateCustomer = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, _next: NextFunction) => {
     const { id } = req.params;
     const merchantId = req.user?.merchantId;
     const updates = req.body;
@@ -110,7 +110,7 @@ export const updateCustomer = asyncHandler(
  * GET /api/customers/:id/orders
  */
 export const getCustomerOrders = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, _next: NextFunction) => {
     const { id } = req.params;
     const merchantId = req.user?.merchantId;
 
@@ -134,3 +134,4 @@ export const getCustomerOrders = asyncHandler(
     });
   }
 );
+

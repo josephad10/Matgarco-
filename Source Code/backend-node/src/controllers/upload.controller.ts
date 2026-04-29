@@ -8,7 +8,7 @@ import { uploadImage, uploadMultipleImages } from '../config/cloudinary';
  * POST /api/upload/single
  */
 export const uploadSingleImage = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, _next: NextFunction) => {
     const merchantId = req.user?.merchantId;
 
     if (!merchantId) {
@@ -39,7 +39,7 @@ export const uploadSingleImage = asyncHandler(
  * POST /api/upload/multiple
  */
 export const uploadMultipleImagesController = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, _next: NextFunction) => {
     const merchantId = req.user?.merchantId;
 
     if (!merchantId) {
@@ -63,3 +63,4 @@ export const uploadMultipleImagesController = asyncHandler(
     });
   }
 );
+

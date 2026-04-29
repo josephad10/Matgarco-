@@ -22,7 +22,7 @@ import { sendOrderConfirmation } from '../services/email.service';
  * GET /api/orders
  */
 export const getOrders = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, _next: NextFunction) => {
     const merchantId = req.user?.merchantId;
 
     if (!merchantId) {
@@ -78,7 +78,7 @@ export const getOrders = asyncHandler(
  * GET /api/orders/:id
  */
 export const getOrderById = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, _next: NextFunction) => {
     const { id } = req.params;
     const merchantId = req.user?.merchantId;
 
@@ -118,7 +118,7 @@ export const getOrderById = asyncHandler(
  *      are committed inside the same atomic boundary as stock and order.
  */
 export const createOrder = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, _next: NextFunction) => {
     const {
       items,
       customerInfo,
@@ -377,7 +377,7 @@ export const createOrder = asyncHandler(
  * PATCH /api/orders/:id/status
  */
 export const updateOrderStatus = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, _next: NextFunction) => {
     const { id } = req.params;
     const { orderStatus, note } = req.body;
     const merchantId = req.user?.merchantId;
@@ -425,7 +425,7 @@ export const updateOrderStatus = asyncHandler(
  * PATCH /api/orders/:id/payment
  */
 export const updatePaymentStatus = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, _next: NextFunction) => {
     const { id } = req.params;
     const { paymentStatus, transactionId } = req.body;
     const merchantId = req.user?.merchantId;
@@ -475,7 +475,7 @@ export const updatePaymentStatus = asyncHandler(
  * on trackQuantity.
  */
 export const cancelOrder = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, _next: NextFunction) => {
     const { id } = req.params;
     const { reason } = req.body;
     const merchantId = req.user?.merchantId;
@@ -577,7 +577,7 @@ export const cancelOrder = asyncHandler(
  * PATCH /api/orders/:id/tracking
  */
 export const updateTracking = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, _next: NextFunction) => {
     const { id } = req.params;
     const { trackingNumber, shippingProvider } = req.body;
     const merchantId = req.user?.merchantId;
@@ -612,3 +612,4 @@ export const updateTracking = asyncHandler(
     });
   }
 );
+

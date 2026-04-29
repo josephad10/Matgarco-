@@ -1,5 +1,5 @@
 import { Response, NextFunction } from 'express';
-import Product from '../models/Product';
+import Product, { IProduct } from '../models/Product';
 import Merchant from '../models/Merchant';
 import { AppError, asyncHandler } from '../middleware/error.middleware';
 import { AuthRequest } from '../types';
@@ -11,7 +11,7 @@ import { calculatePagination } from '../utils/helpers';
  * GET /api/products
  */
 export const getProducts = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, __next: NextFunction) => {
     const merchantId = req.user?.merchantId;
     
     if (!merchantId) {
@@ -22,7 +22,7 @@ export const getProducts = asyncHandler(
     const limit = parseInt(req.query.limit as string) || 10;
     const { skip } = calculatePagination(page, limit);
 
-    const filter: any = { merchantId };
+    const filter: Record<string, any> = { merchantId };
 
     // Filters
     if (req.query.status) {
@@ -66,7 +66,7 @@ export const getProducts = asyncHandler(
  * GET /api/products/:id
  */
 export const getProductById = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, __next: NextFunction) => {
     const { id } = req.params;
     const merchantId = req.user?.merchantId;
 
@@ -95,7 +95,7 @@ export const getProductById = asyncHandler(
  * GET /api/products/slug/:slug
  */
 export const getProductBySlug = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, __next: NextFunction) => {
     const { slug } = req.params;
     const { merchantId } = req.query;
 
@@ -130,7 +130,7 @@ export const getProductBySlug = asyncHandler(
  * POST /api/products
  */
 export const createProduct = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, __next: NextFunction) => {
     const merchantId = req.user?.merchantId;
 
     if (!merchantId) {
@@ -205,7 +205,7 @@ export const createProduct = asyncHandler(
  * PATCH /api/products/:id
  */
 export const updateProduct = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, __next: NextFunction) => {
     const { id } = req.params;
     const merchantId = req.user?.merchantId;
     const updates = req.body;
@@ -255,7 +255,7 @@ export const updateProduct = asyncHandler(
  * DELETE /api/products/:id
  */
 export const deleteProduct = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, __next: NextFunction) => {
     const { id } = req.params;
     const merchantId = req.user?.merchantId;
 
@@ -282,7 +282,7 @@ export const deleteProduct = asyncHandler(
  * POST /api/products/:id/duplicate
  */
 export const duplicateProduct = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, __next: NextFunction) => {
     const { id } = req.params;
     const merchantId = req.user?.merchantId;
 
@@ -293,7 +293,7 @@ export const duplicateProduct = asyncHandler(
     }
 
     // Create copy
-    const { _id, createdAt, updatedAt, ...productData } = originalProduct.toObject() as any;
+    const { _id, createdAt, updatedAt, ...productData } = originalProduct.toObject() as IProduct;
     
     // Update name and slug
     productData.name = `${productData.name} (Copy)`;
@@ -317,7 +317,7 @@ export const duplicateProduct = asyncHandler(
  * GET /api/products/featured
  */
 export const getFeaturedProducts = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, __next: NextFunction) => {
     const { merchantId } = req.query;
     const limit = parseInt(req.query.limit as string) || 6;
 
@@ -340,3 +340,4 @@ export const getFeaturedProducts = asyncHandler(
     });
   }
 );
+

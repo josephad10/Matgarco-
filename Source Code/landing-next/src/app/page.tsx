@@ -1,13 +1,13 @@
-"use client";
-
 import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { TrustMarquee } from "@/components/sections/TrustMarquee";
-import { EdgeBentoSection } from "@/components/sections/EdgeBentoSection";
-import { TimelineSteps } from "@/components/sections/TimelineSteps";
-import { Testimonials } from "@/components/sections/Testimonials";
-import { MegaCTA } from "@/components/sections/MegaCTA";
+import { SectorShowcaseSection } from "@/components/sections/SectorShowcaseSection";
+import { EngineeringAuthoritySection } from "@/components/sections/EngineeringAuthoritySection";
+import { QuantusSection } from "@/components/sections/QuantusSection";
+import { CompleteEcosystemSection } from "@/components/sections/CompleteEcosystemSection";
+import { MerchantJourneySection } from "@/components/sections/MerchantJourneySection";
+import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
+import { GlobalFooter } from "@/components/sections/GlobalFooter";
 
 export default function Home() {
   return (
@@ -16,12 +16,14 @@ export default function Home() {
       <main className="flex-grow">
         <HeroSection />
         <TrustMarquee />
-        <EdgeBentoSection />
-        <TimelineSteps />
-        <Testimonials />
-        <MegaCTA />
+        <SectorShowcaseSection />
+        <EngineeringAuthoritySection />
+        <QuantusSection />
+        <CompleteEcosystemSection />
+        <MerchantJourneySection />
+        <TestimonialsSection />
       </main>
-      <Footer />
+      <GlobalFooter />
     </div>
   );
 }

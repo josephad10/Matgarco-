@@ -25,8 +25,27 @@ import paymentRoutes from './routes/payment.routes';
 import payoutRoutes from './routes/payout.routes';
 import storeThemeRoutes from './routes/storeTheme.routes';
 import publicThemesRoutes from './routes/publicThemes.routes';
+import publicRoutes from './routes/public.routes';
 
 const app: Application = express();
+
+// -----------------------------------------------------------------------
+// CRITICAL: Reverse Proxy Trust Configuration
+//
+// `trust proxy: 1` instructs Express to trust exactly ONE hop of proxy
+// headers (X-Forwarded-For). This is required when running behind:
+//   - Cloudflare (production CDN)
+//   - Vercel Edge Network
+//   - Railway / Render internal load balancers
+//
+// Without this setting, `req.ip` resolves to the internal proxy IP
+// (e.g., 10.0.0.1), causing ALL clients to share a single rate-limit
+// bucket — effectively breaking the apiLimiter for the entire platform.
+//
+// Security caveat: Setting this to `true` (trust all proxies) is unsafe.
+// Using `1` (trust exactly one hop) is the correct production posture.
+// -----------------------------------------------------------------------
+app.set('trust proxy', 1);
 
 // Security middleware
 app.use(helmet());
@@ -93,6 +112,10 @@ app.use('/api/payments', paymentRoutes);
 app.use('/api/payouts', payoutRoutes);
 app.use('/api/store-themes', storeThemeRoutes);
 app.use('/api/themes', publicThemesRoutes);
+
+// Public unauthenticated routes — mounted last among route declarations
+// to signal explicitly that no auth middleware is applied to this prefix.
+app.use('/api/public', publicRoutes);
 
 // 404 handler
 app.use(notFoundHandler);

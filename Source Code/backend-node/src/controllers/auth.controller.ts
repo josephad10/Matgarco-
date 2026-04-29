@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import User from '../models/User';
-import Merchant from '../models/Merchant';
+import Merchant, { IMerchant } from '../models/Merchant';
 import { AppError, asyncHandler } from '../middleware/error.middleware';
 import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from '../services/jwt.service';
 import { generateToken } from '../utils/helpers';
@@ -12,7 +12,7 @@ import { sendWelcomeEmail } from '../services/email.service';
  * POST /api/auth/register
  */
 export const register = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req: Request, res: Response, __next: NextFunction) => {
     const { email, password, firstName, lastName, phone } = req.body;
     
     // Check if user exists
@@ -85,7 +85,7 @@ export const register = asyncHandler(
  * POST /api/auth/login
  */
 export const login = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req: Request, res: Response, __next: NextFunction) => {
     const { email, password } = req.body;
     
     // Find user with password
@@ -135,9 +135,9 @@ export const login = asyncHandler(
     let onboardingCompleted = true;
     let subdomain = '';
     if (user.merchantId) {
-      const merchant = await Merchant.findById(user.merchantId).select('onboardingCompleted subdomain').lean();
-      onboardingCompleted = (merchant as any)?.onboardingCompleted ?? true;
-      subdomain = (merchant as any)?.subdomain || '';
+      const merchant = await Merchant.findById(user.merchantId).select('onboardingCompleted subdomain').lean<IMerchant>();
+      onboardingCompleted = merchant?.onboardingCompleted ?? true;
+      subdomain = merchant?.subdomain || '';
     } else {
       // User has no merchant → they need to complete onboarding
       onboardingCompleted = false;
@@ -173,7 +173,7 @@ export const login = asyncHandler(
  * POST /api/auth/refresh
  */
 export const refreshAccessToken = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req: Request, res: Response, __next: NextFunction) => {
     const refreshToken = req.cookies.refreshToken;
     
     if (!refreshToken) {
@@ -214,7 +214,7 @@ export const refreshAccessToken = asyncHandler(
  * POST /api/auth/logout
  */
 export const logout = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, __next: NextFunction) => {
     if (req.user) {
       // Clear refresh token from database
       await User.findByIdAndUpdate(req.user.userId, {
@@ -237,7 +237,7 @@ export const logout = asyncHandler(
  * GET /api/auth/me
  */
 export const getCurrentUser = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, __next: NextFunction) => {
     const user = await User.findById(req.user?.userId);
     
     if (!user) {
@@ -247,8 +247,8 @@ export const getCurrentUser = asyncHandler(
     // Fetch subdomain from merchant
     let subdomain = '';
     if (user.merchantId) {
-      const merchant = await Merchant.findById(user.merchantId).select('subdomain').lean();
-      subdomain = (merchant as any)?.subdomain || '';
+      const merchant = await Merchant.findById(user.merchantId).select('subdomain').lean<IMerchant>();
+      subdomain = merchant?.subdomain || '';
     }
 
     res.status(200).json({
@@ -278,7 +278,7 @@ export const getCurrentUser = asyncHandler(
  * POST /api/auth/verify-email
  */
 export const verifyEmail = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req: Request, res: Response, __next: NextFunction) => {
     const { token } = req.body;
     
     const user = await User.findOne({ verificationToken: token });
@@ -303,7 +303,7 @@ export const verifyEmail = asyncHandler(
  * POST /api/auth/forgot-password
  */
 export const forgotPassword = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req: Request, res: Response, __next: NextFunction) => {
     const { email } = req.body;
     
     const user = await User.findOne({ email });
@@ -338,7 +338,7 @@ export const forgotPassword = asyncHandler(
  * PATCH /api/auth/me
  */
 export const updateProfile = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, __next: NextFunction) => {
     const userId = req.user?.userId;
     if (!userId) throw new AppError('Not authenticated', 401);
 
@@ -375,7 +375,7 @@ export const updateProfile = asyncHandler(
  * POST /api/auth/change-password
  */
 export const changePassword = asyncHandler(
-  async (req: AuthRequest, res: Response, next: NextFunction) => {
+  async (req: AuthRequest, res: Response, __next: NextFunction) => {
     const userId = req.user?.userId;
     if (!userId) throw new AppError('Not authenticated', 401);
 
@@ -408,7 +408,7 @@ export const changePassword = asyncHandler(
  * POST /api/auth/reset-password
  */
 export const resetPassword = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req: Request, res: Response, __next: NextFunction) => {
     const { token, newPassword } = req.body;
     
     const user = await User.findOne({
@@ -431,3 +431,4 @@ export const resetPassword = asyncHandler(
     });
   }
 );
+

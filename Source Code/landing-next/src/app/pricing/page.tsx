@@ -1,10 +1,10 @@
 import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
+import { GlobalFooter } from "@/components/sections/GlobalFooter";
 import { PricingHero } from "@/components/sections/PricingHero";
 import { PricingCards } from "@/components/sections/PricingCards";
 import { PricingComparison } from "@/components/sections/PricingComparison";
 import { PricingFAQ } from "@/components/sections/PricingFAQ";
-import { MegaCTA } from "@/components/sections/MegaCTA";
+
 
 export default function PricingPage() {
   return (
@@ -16,10 +16,10 @@ export default function PricingPage() {
         <PricingCards />
         <PricingComparison />
         <PricingFAQ />
-        <MegaCTA />
+        
       </main>
 
-      <Footer />
+      <GlobalFooter />
     </div>
   );
 }

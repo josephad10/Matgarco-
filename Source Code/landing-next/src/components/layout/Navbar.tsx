@@ -1,72 +1,58 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { Menu, X, Globe } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { LangToggle } from "@/components/islands/LangToggle";
+import { useUIStore } from "@/store/useUIStore";
+import { useEffect } from "react";
 
 export function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const { isMobileMenuOpen, setMobileMenuOpen } = useUIStore();
   const pathname = usePathname();
-  const { t, toggleLang, lang, isRTL } = useLanguage();
+  const { t, lang } = useLanguage();
 
   const navLinks = [
-    { href: "/features", label: t.nav.features },
-    { href: "/solutions", label: t.nav.solutions },
-    { href: "/pricing", label: t.nav.pricing },
-    { href: "/resources", label: t.nav.resources },
-    { href: "/about", label: t.nav.about },
+    { href: "/features", label: t.nav?.features || "Features" },
+    { href: "/solutions", label: t.nav?.solutions || "Solutions" },
+    { href: "/pricing", label: t.nav?.pricing || "Pricing" },
+    { href: "/resources", label: t.nav?.resources || "Resources" },
+    { href: "/about", label: t.nav?.about || "About Us" },
   ];
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    setIsMobileOpen(false);
-  }, [pathname]);
+    setMobileMenuOpen(false);
+  }, [pathname, setMobileMenuOpen]);
 
   return (
-    <header
-      className={cn(
-        "fixed top-0 w-full z-50 transition-all duration-300",
-        isScrolled
-          ? "bg-white/80 backdrop-blur-xl border-b border-slate-200/80 py-1 shadow-sm"
-          : "bg-transparent py-2"
-      )}
-    >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 relative z-50">
+    <header className="fixed top-0 w-full z-50 bg-[#050505]/90 backdrop-blur-xl border-b border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] h-20 flex items-center text-white shrink-0">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-full">
+        
+        <Link href="/" className="flex items-center gap-2 relative z-50 shrink-0 outline-none">
           <Image
             src="/logo.svg"
-            alt="Matgarco Logo"
-            width={140}
-            height={30}
-            className="object-contain"
+            alt="Matgarco"
+            width={195}
+            height={48}
+            className="object-contain transition-all duration-300"
             priority
           />
         </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-1 font-medium">
+        <nav className="hidden lg:flex items-center gap-1 font-medium z-50 h-full ms-auto pe-8">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               className={cn(
-                "px-4 py-2 rounded-lg transition-all duration-200 text-sm",
+                "px-4 py-3 rounded-lg transition-all duration-200 text-sm flex items-center outline-none",
+                lang === 'ar' ? 'leading-[1.6] tracking-normal' : 'tracking-tighter',
                 pathname === link.href
-                  ? "text-matgarco-700 bg-matgarco-50 font-bold"
-                  : "text-slate-600 hover:text-matgarco-700 hover:bg-slate-50"
+                  ? "bg-white/10 font-bold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]"
+                  : "text-white/80 hover:text-white hover:bg-white/5"
               )}
             >
               {link.label}
@@ -74,54 +60,44 @@ export function Navbar() {
           ))}
         </nav>
 
-        {/* Actions */}
-        <div className="hidden lg:flex items-center gap-2">
-          {/* Language Toggle */}
-          <button
-            onClick={toggleLang}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-bold text-slate-500 hover:text-matgarco-700 hover:bg-slate-50 transition-all border border-transparent hover:border-slate-200"
-            title={lang === "ar" ? "Switch to English" : "التبديل للعربية"}
-          >
-            <Globe size={16} />
-            <span>{t.nav.langToggle}</span>
-          </button>
-
+        <div className="hidden lg:flex items-center gap-3 z-50 h-full shrink-0">
+          <LangToggle />
           <a
             href="http://localhost:3002/login"
-            className="px-4 py-2.5 font-bold text-slate-600 hover:text-matgarco-700 transition-colors rounded-lg hover:bg-slate-50 text-sm"
+            className={cn(
+              "px-4 py-3 font-bold text-white hover:text-[#3B82F6] transition-colors rounded-lg text-sm flex items-center outline-none",
+              lang === 'ar' ? 'leading-[1.6] tracking-normal' : 'tracking-tighter'
+            )}
           >
-            {t.nav.login}
+            {t.nav?.login || "Login"}
           </a>
           <a
             href="http://localhost:3002/register"
-            className="px-5 py-2.5 bg-matgarco-700 text-white font-bold rounded-xl hover:bg-matgarco-800 transition-all shadow-md shadow-matgarco-500/20 hover:shadow-lg hover:shadow-matgarco-500/30 hover:-translate-y-0.5 text-sm"
+            className={cn(
+              "px-5 py-3 bg-[#000080] text-white font-black hover:bg-blue-900 transition-transform active:scale-95 shadow-[0_4px_15px_rgba(0,0,128,0.4)] rounded-xl text-sm flex items-center outline-none",
+              lang === 'ar' ? 'leading-[1.6] tracking-normal' : 'tracking-tighter'
+            )}
           >
-            {t.nav.cta}
+            {t.nav?.cta || "Start Free"}
           </a>
         </div>
 
-        {/* Mobile Menu Buttons */}
-        <div className="flex lg:hidden items-center gap-2 relative z-50">
+        <div className="flex lg:hidden items-center gap-2 relative z-50 h-full shrink-0 ms-auto">
+          <LangToggle />
           <button
-            onClick={toggleLang}
-            className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-slate-200 transition-colors text-xs font-bold"
+            onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
+            className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] border border-white/20 outline-none"
+            aria-label="Toggle menu"
           >
-            {t.nav.langToggle}
-          </button>
-          <button
-            onClick={() => setIsMobileOpen(!isMobileOpen)}
-            className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-700 hover:bg-slate-200 transition-colors"
-          >
-            {isMobileOpen ? <X size={20} /> : <Menu size={20} />}
+            {isMobileMenuOpen ? <X size={20} className="text-white" /> : <Menu size={20} className="text-white" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
       <div
         className={cn(
-          "fixed inset-0 bg-white z-40 flex flex-col pt-24 px-6 pb-8 transition-all duration-300 lg:hidden",
-          isMobileOpen
+          "fixed inset-0 bg-[#050505]/95 z-40 flex flex-col pt-24 px-6 pb-8 transition-all duration-300 lg:hidden text-white overflow-y-auto will-change-transform",
+          isMobileMenuOpen
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-4 pointer-events-none"
         )}
@@ -132,10 +108,11 @@ export function Navbar() {
               key={link.href}
               href={link.href}
               className={cn(
-                "px-6 py-4 rounded-2xl text-lg font-bold transition-all",
+                "px-6 py-4 rounded-2xl text-lg font-bold transition-colors outline-none",
+                lang === 'ar' ? 'leading-[1.6] tracking-normal' : 'tracking-tighter',
                 pathname === link.href
-                  ? "bg-matgarco-50 text-matgarco-700"
-                  : "text-slate-700 hover:bg-slate-50"
+                  ? "bg-white/10 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]"
+                  : "text-white/80 hover:bg-white/5 hover:text-white"
               )}
             >
               {link.label}
@@ -143,18 +120,24 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="flex flex-col gap-3 pt-6 border-t border-slate-100">
+        <div className="flex flex-col gap-3 pt-6 border-t border-white/10">
           <a
             href="http://localhost:3002/login"
-            className="px-6 py-4 text-center font-bold text-slate-700 rounded-2xl border-2 border-slate-200 hover:border-matgarco-300"
+            className={cn(
+              "px-6 py-4 text-center font-bold text-white hover:text-[#3B82F6] rounded-2xl border border-white/20 transition-colors shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] outline-none",
+              lang === 'ar' ? 'leading-[1.6] tracking-normal' : 'tracking-tighter'
+            )}
           >
-            {t.nav.login}
+            {t.nav?.login || "Login"}
           </a>
           <a
             href="http://localhost:3002/register"
-            className="px-6 py-4 text-center bg-matgarco-700 text-white font-bold rounded-2xl shadow-lg"
+            className={cn(
+              "px-6 py-4 text-center bg-[#000080] text-white font-black rounded-2xl shadow-[0_4px_15px_rgba(0,0,128,0.4)] hover:bg-blue-900 transition-colors outline-none",
+              lang === 'ar' ? 'leading-[1.6] tracking-normal' : 'tracking-tighter'
+            )}
           >
-            {t.nav.cta}
+            {t.nav?.cta || "Start Free"}
           </a>
         </div>
       </div>

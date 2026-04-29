@@ -7,17 +7,18 @@ interface IProductImage {
   isPrimary: boolean;
 }
 
+interface IProductAttribute {
+  key: string;
+  value: string;
+}
+
 interface IProductVariant {
   _id: mongoose.Types.ObjectId;
   name: string;
   sku?: string;
   price?: number;
   quantity?: number;
-  attributes: {
-    size?: string;
-    color?: string;
-    [key: string]: any;
-  };
+  attributes: IProductAttribute[];
 }
 
 export interface IProduct extends Document {
@@ -181,7 +182,12 @@ const productSchema = new Schema<IProduct>(
         sku: String,
         price: Number,
         quantity: Number,
-        attributes: Schema.Types.Mixed,
+        attributes: [
+          {
+            key: { type: String, required: true },
+            value: { type: String, required: true },
+          },
+        ],
       },
     ],
     
@@ -244,7 +250,7 @@ const productSchema = new Schema<IProduct>(
     timestamps: true,
     toJSON: {
       virtuals: true,
-      transform: function(doc, ret) {
+      transform: function(_doc, ret) {
         // Map quantity to stock for frontend compatibility
         (ret as any).stock = ret.quantity;
         return ret;
@@ -252,7 +258,7 @@ const productSchema = new Schema<IProduct>(
     },
     toObject: {
       virtuals: true,
-      transform: function(doc, ret) {
+      transform: function(_doc, ret) {
         (ret as any).stock = ret.quantity;
         return ret;
       }

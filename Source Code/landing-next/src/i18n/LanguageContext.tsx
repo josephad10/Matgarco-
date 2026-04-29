@@ -22,9 +22,23 @@ const LanguageContext = createContext<LanguageContextType>({
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLang] = useState<Lang>("ar");
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Initialize language from localStorage on mount
+  useEffect(() => {
+    const savedLang = localStorage.getItem("matgarco_lang") as Lang;
+    if (savedLang && (savedLang === "ar" || savedLang === "en")) {
+      setLang(savedLang);
+    }
+    setIsMounted(true);
+  }, []);
 
   const toggleLang = useCallback(() => {
-    setLang((prev) => (prev === "ar" ? "en" : "ar"));
+    setLang((prev) => {
+      const next = prev === "ar" ? "en" : "ar";
+      localStorage.setItem("matgarco_lang", next);
+      return next;
+    });
   }, []);
 
   const t = lang === "ar" ? ar : en;
@@ -32,12 +46,26 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   // Update <html> attributes when language changes
   useEffect(() => {
+    if (!isMounted) return;
     document.documentElement.lang = lang;
     document.documentElement.dir = isRTL ? "rtl" : "ltr";
-  }, [lang, isRTL]);
+  }, [lang, isRTL, isMounted]);
+
+  // Memoize context value to prevent unnecessary re-renders of consumers
+  const contextValue = React.useMemo(() => ({
+    lang,
+    t,
+    toggleLang,
+    isRTL
+  }), [lang, t, toggleLang, isRTL]);
+
+  // Prevent hydration mismatch by only rendering after mount
+  if (!isMounted) {
+    return null;
+  }
 
   return (
-    <LanguageContext.Provider value={{ lang, t, toggleLang, isRTL }}>
+    <LanguageContext.Provider value={contextValue}>
       {children}
     </LanguageContext.Provider>
   );

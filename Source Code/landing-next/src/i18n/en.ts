@@ -15,14 +15,43 @@ export const en: Translations = {
 
   // Hero
   hero: {
-    badge: "Matgarco 2.0 is Live Now",
+    title_static: "Build the next ",
+    words: ["market leader", "global empire", "unicorn", "success story", "household name", "one to watch"],
     title1: "The Smartest Platform to Launch",
     title2: "Your E-commerce Business",
     subtitle: "Build your professional store in minutes with zero coding. An all-in-one payments & shipping system that takes your business to the next level.",
+    description: "Your complete e-commerce platform. Payment gateways, shipping, and professional storefronts all in one place.",
+    slogan: "Dream big, build fast, and grow far on Matgarco",
+    cta_trial: "Start 14-Day Free Trial - No CC",
     ctaPrimary: "Start Your Free Trial",
     ctaSecondary: "Explore the Platform",
     trialNote: "14-day free trial • No credit card required",
     dashboardLabel: "Matgarco Dashboard ⚡",
+    ctaLabel: "Start Free Trial",
+  },
+
+  // Mockup
+  mockup: {
+    paymob: "API: Paymob Active",
+    secure: "Secure Connection",
+    conversion: "Conversion",
+    spike: "+14.5% Spike",
+    proDashboard: "Pro Dashboard",
+    storefront: "Storefront",
+    products_nav: "Products",
+    analytics: "Analytics",
+    settings: "Settings",
+    search: "Search store...",
+    setup: "1-Click Setup",
+    heroTitle: "Premium Collection",
+    heroSubtitle: "Elegance defined.",
+    featured: "Featured Items",
+    viewAll: "View All",
+    products: [
+      { title: "Classic Black Shirt", price: "EGP 1,200.00" },
+      { title: "Premium Zip Sweater", price: "EGP 1,850.00" },
+      { title: "Geim Storm Jacket", price: "EGP 3,400.00" },
+    ]
   },
 
   // Trust Marquee
@@ -31,74 +60,254 @@ export const en: Translations = {
     partners: ["Bosta Logistics", "Paymob Payments", "Fawry Installments", "Aramex Shipping", "Vodafone Cash", "Visa / Mastercard", "Tabby Finance"],
   },
 
-  // Edge Bento
-  edge: {
-    title1: "Launch Strong with",
-    title2: "The Matgarco Edge",
-    subtitle: "We provide you with the most powerful e-commerce infrastructure, designed to remove barriers and accelerate your sales growth with a fair pricing model that scales with you.",
-    card1Title: "Tiered Payments & Shipping",
-    card1Desc: "Connect your store with shipping carriers and payment gateways in one click. With our advanced plans, enjoy 0% commission and direct integration using your own API keys.",
-    card2Title: "AI-Powered Tools 🤖",
-    card2Desc: "The built-in AI Copywriter analyzes your products and generates SEO-optimized descriptions to drive organic traffic to your store instantly.",
-    card3Title: "Full Design Control",
-    card3Desc: "No rigid templates. The Theme Engine lets you customize colors, fonts, and layouts with pixel-perfect precision.",
-    card4Title: "Dynamic Team Management",
-    card4Desc: "Define granular staff permissions, protect your overall sales data, and monitor activity through a detailed audit log across the entire platform.",
+  // Phase 3+4: Galaxy Section
+  galaxy: {
+    partnerBadge: "Partner Program",
+    partnerTitle: "Grow Together with Matgarco",
+    featuresTitle1: "Everything You Need,",
+    featuresTitle2: "All in One Platform",
+    featuresSubtitle: "Explore our powerful features designed to streamline your e-commerce operations",
+    featurePills: [
+      "Website Builder",
+      "Funnel Builder",
+      "Social Inbox",
+      "Orders",
+      "Team Management",
+      "Inventory",
+      "Community",
+      "Domains",
+      "Shipping",
+      "Payments",
+      "Media Buyers",
+    ],
   },
 
-  // Timeline
-  timeline: {
-    title1: "Getting Started is Easy,",
-    title2: "Even When You're Busy",
-    subtitle: "No prior experience needed. We've simplified everything so you can launch your business on your own in record time.",
-    step1Title: "Register & Choose Your Store Name",
-    step1Desc: "Simple and fast steps to create your basic account and choose your custom link or connect your own domain.",
-    step2Title: "Pick a Template & Brand It",
-    step2Desc: "Design your store using our advanced Theme Engine. Change colors, fonts, and layouts to perfectly match your brand identity.",
-    step3Title: "Add Products & Get Your First Order",
-    step3Desc: "Once you upload your products, your store is ready to receive customers with instant integration of payment and shipping methods.",
+  // Phase 5: Sector Showcase
+  sectors: {
+    badge: "Multi-Sector Platform",
+    title1: "Tailored for your",
+    title2: "unique business model",
+    subtitle: "Stop compromising. From hyper-local D2C retail to complex B2B wholesale and digital subscriptions — unify your entire empire on one high-performance platform.",
+    tabs: [
+      {
+        id: "retail",
+        title: "Retail & D2C",
+        desc: "Deliver hyper-personalized shopping experiences with blazingly fast storefronts.",
+        features: ["Omnichannel Sync", "Flash Sales Engine", "AI Recommendations"],
+        cta: "Explore Retail & D2C",
+      },
+      {
+        id: "wholesale",
+        title: "Wholesale & B2B",
+        desc: "Automate bulk orders, enforce MOQ, and streamline complex tax pipelines.",
+        features: ["Tiered Volume Pricing", "Custom Tax Groups", "B2B Client Portals"],
+        cta: "Explore Wholesale & B2B",
+      },
+      {
+        id: "services",
+        title: "Services & Subscriptions",
+        desc: "Monetize your expertise with automated billing and seamless booking systems.",
+        features: ["Recurring Billing", "Calendar Integrations", "Digital Delivery"],
+        cta: "Explore Services & Subscriptions",
+      },
+    ],
+  },
+
+  // Phase 6: Engineering Authority
+  engineering: {
+    badge: "Engineering Authority",
+    title1: "There's no better place to build your empire.",
+    subtitle: "Built by engineers, for growing empires. Zero-compromise performance.",
+    card1Title: "The world's best mobile-first storefronts.",
+    card1Desc: "Architected from the ground up prioritizing localized layout paints and touch reflexes explicitly scaling organically.",
+    card2Title: "AI-Powered Descriptions",
+    card2Desc: "Generate high-converting SEO optimized semantics via context-aware generative transformers natively.",
+    stat1Value: "10x",
+    stat1Label: "Faster Deployments",
+    stat2Value: "99.9%",
+    stat2Label: "Uptime SLA",
+    badgeSLA: "99.9% Uptime SLA",
+    floating: {
+      title1: "Find your forever customers",
+      title2: "Grow around the world",
+      title3: "Take care of business",
+      title4: "Apps for anything else",
+      egypt: "Egypt",
+    },
+  },
+
+  // Phase 7: Mobile & Social Proof
+  phase7: {
+    title: "Run your empire from your pocket.",
+    subtitle: "Full-featured mobile management. Because commerce never sleeps.",
+    notifications: {
+      notif1: "New Order: 450 EGP",
+      notif2: "Inventory Low: Black Hoodie",
+    },
+    // Testimonials
+    testimonials: [
+      {
+        name: "Ahmed T.",
+        role: "CEO, TechStore",
+        text: "Matgarco's velocity is unmatched. We launched in 10 minutes and saw a 40% bump in conversions."
+      },
+      {
+        name: "Sarah M.",
+        role: "Founder, Glow Beauty",
+        text: "The mobile admin app feels like magic. I manage inventory seamlessly while on the go."
+      },
+      {
+        name: "Omar R.",
+        role: "B2B Wholesaler",
+        text: "Their tax pipelines and bulk order routing saved us hundreds of hours in operational overhead."
+      }
+    ]
+  },
+
+  // Quantus AI
+  quantus: {
+    title: "Matgarco Quantus AI",
+    subtitle: "Your Autonomous eCommerce Architect. Generate, map, and deploy elite storefronts using pure generative intelligence.",
+    features: [
+      {
+        title: "Conversational Commerce Generation",
+        desc: "Describe your vision in natural language. Quantus translates plain text into complex architectural templates in real-time."
+      },
+      {
+        title: "Vision-to-Storefront API",
+        desc: "Upload any UI reference. Our neural engine analyzes the layout and maps it to Matgarco's premium components with absolute precision."
+      },
+      {
+        title: "Zero-Hallucination JSON Bridging",
+        desc: "No guessing. Quantus connects securely to Gemini APIs, outputting strict, deterministic JSON for zero-code deployments."
+      }
+    ]
+  },
+
+  // Ecosystem
+  ecosystem: {
+    title: "Your Autonomous E-commerce Engine",
+    mainDescription: "Real-time transactional reconciliation integrated explicitly enabling zero-code deployments globally securely mapping absolute event consistency pipelines natively.",
+    cards: {
+      mediaBuyer: {
+        name: "Mohamed Hosny",
+        role: "Top Media Buyer",
+        salesLabel: "Sales",
+        ordersLabel: "Orders",
+        badge: "MMedia",
+        desc: "Access a verified marketplace of elite media buyers to scale your ad campaigns. Track transparent metrics, manage budgets, and maximize ROAS globally."
+      },
+      socialInbox: {
+        badge: "MInbox",
+        desc: "Centralize WhatsApp, Instagram, and Messenger into a single AI-powered neural inbox. Automate replies and route high-ticket leads instantly."
+      },
+      customDomain: {
+        badge: "MDomain",
+        placeholder: "yourstore.matgarco.app",
+        connectBtn: "Connect Domain",
+        instantPaymentsBadge: "Instant Payments (Paymob, Fawry)",
+        desc: "Deploy instantly on a secure Matgarco subdomain or connect your custom domain with Enterprise SSL and native Fawry/Paymob payment gateways."
+      },
+      funnelBuilder: {
+        badge: "MFunnel",
+        desc: "Construct high-converting, multi-step sales pipelines. Utilize our drag-and-drop generative UI to optimize the customer journey and A/B test natively."
+      },
+      community: {
+        author: "Ahmed Hassan",
+        handle: "@ahmed_shop",
+        post: "Anyone knows a good hoodie factory?",
+        badge: "MCommunity",
+        desc: "Join an exclusive, vetted network of 7-figure merchants. Share strategic insights, discover reliable suppliers, and scale your empire collaboratively."
+      }
+    }
+  },
+
+  // Journey
+  journey: {
+    title: "Your Empire, Ready in 10 Minutes.",
+    subtitle: "Build a premium brand website with zero code experience. Simple, fast, and fully autonomous.",
+    steps: [
+      {
+        title: "Register & Choose Your Store Name",
+        desc: "Simple and fast steps to create your secure account and connect your custom domain instantly."
+      },
+      {
+        title: "Pick a Template & Brand It",
+        desc: "Design your store using Quantus AI. Change colors, fonts, and layouts in seconds to perfectly match your brand identity with zero code."
+      },
+      {
+        title: "Add Products & Get Your First Order",
+        desc: "Once you upload your products, your store is ready to receive customers with instant integration of local payment and shipping methods."
+      }
+    ]
   },
 
   // Testimonials
   testimonials: {
-    title1: "Merchants Who Achieved Success with",
-    title2: "Matgarco",
-    subtitle: "Join thousands of entrepreneurs who chose the most powerful infrastructure for their stores.",
+    title: "Trusted by Visionary Merchants",
+    subtitle: "See what our early adopters and B2B partners are saying about Matgarco's infrastructure.",
     reviews: [
-      { name: "Ahmed Hassan", role: "Fashion Brand Founder", content: "After trying several local platforms, Matgarco's tiered subscription saved me from heavy commissions. Their support team is excellent." },
-      { name: "Sara Mahmoud", role: "Electronics Store Owner", content: "The biggest advantage of Matgarco is the color and theme engine. It literally made my store look world-class in less than an hour without writing a single line of code." },
-      { name: "Mohamed Kamal", role: "Digital Products Merchant", content: "The payment gateway integration was seamless, especially with the Pro plan where I have complete freedom to add my own API keys." },
-    ],
+      {
+        name: "Ahmed M.",
+        store: "TechFlow",
+        text: "The Quantus AI mapped our brand's entire UI in minutes. Zero code, pure magic."
+      },
+      {
+        name: "Sarah K.",
+        store: "Luxe Boutique",
+        text: "Native Fawry and Paymob integration out of the box saved us weeks of API development."
+      },
+      {
+        name: "Omar D.",
+        store: "DropScale",
+        text: "Finally, an infrastructure that handles our flash sales. The event consistency pipelines are rock solid."
+      },
+      {
+        name: "Nour H.",
+        store: "Beauty Hub",
+        text: "Building a funnel used to take days. With Matgarco's ecosystem, we launched our new product line in 10 minutes."
+      },
+      {
+        name: "Kareem T.",
+        store: "Gadget Zone",
+        text: "The webhooks are truly real-time. Our inventory syncs perfectly across Salla and Shopify."
+      },
+      {
+        name: "Laila R.",
+        store: "Style&Co",
+        text: "The dashboard is insanely fast. You can feel the React Fiber architecture under the hood."
+      }
+    ]
   },
 
-  // Mega CTA
-  megaCta: {
-    title1: "Ready to Take Your Business to",
-    title2: "The Top?",
-    subtitle: "Join thousands of stores that trust Matgarco as their all-in-one technical partner for business growth with minimal effort and maximum efficiency.",
-    ctaPrimary: "Start Your Free Store Now",
-    ctaSecondary: "Talk to Sales Team",
-  },
+
 
   // Footer
   footer: {
-    description: "Your smartest platform to launch and grow your e-commerce business. We provide everything you need to succeed in the digital commerce world.",
-    platform: "Platform",
-    features: "Features",
-    pricing: "Pricing",
-    themes: "Themes",
-    integrations: "Integrations",
-    resources: "Resources",
-    blog: "Blog",
-    help: "Help Center",
-    api: "For Developers",
-    partners: "Partners Program",
-    contact: "Contact Us",
-    supportAvailable: "Support Available",
-    supportDesc: "24/7 support for advanced plans.",
-    rights: "All rights reserved.",
-    privacy: "Privacy Policy",
-    terms: "Terms & Conditions",
+    description: "The all-in-one e-commerce platform empowering businesses to grow, scale, and succeed in the digital marketplace.",
+    columns: [
+      {
+        title: "Platform",
+        links: ["Features", "Pricing", "Mobile App"]
+      },
+      {
+        title: "Ecosystem",
+        links: ["MDomain", "MInbox", "MFunnel", "MMedia"]
+      },
+      {
+        title: "Resources",
+        links: ["Developer API", "Help Center", "Blog"]
+      },
+      {
+        title: "Company",
+        links: ["About Us", "Careers", "Contact Us"]
+      }
+    ],
+    bottomBar: {
+      copyright: "© 2026 Matgarco. • Empowering e-commerce",
+      policyLinks: ["Privacy Policy", "Terms of Service", "Refund Policy"],
+      secured: "Secured by Quantus Guard"
+    }
   },
 
   // Features Page

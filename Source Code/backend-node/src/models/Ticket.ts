@@ -52,4 +52,7 @@ const ticketSchema = new Schema(
   { timestamps: true }
 );
 
+// Compound index for Super Admin filtering and analytics
+ticketSchema.index({ merchantId: 1, status: 1, priority: 1, createdAt: -1 });
+
 export default mongoose.model<ITicket>('Ticket', ticketSchema);

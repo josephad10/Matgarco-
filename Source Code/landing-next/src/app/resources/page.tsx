@@ -1,8 +1,8 @@
 "use client";
 
 import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
-import { MegaCTA } from "@/components/sections/MegaCTA";
+import { GlobalFooter } from "@/components/sections/GlobalFooter";
+
 import { useLanguage } from "@/i18n/LanguageContext";
 import {
   BookOpen,
@@ -130,9 +130,9 @@ export default function ResourcesPage() {
           </div>
         </section>
 
-        <MegaCTA />
+        
       </main>
-      <Footer />
+      <GlobalFooter />
     </div>
   );
 }
