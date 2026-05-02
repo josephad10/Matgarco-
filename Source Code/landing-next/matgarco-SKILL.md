@@ -55,6 +55,8 @@ The Hero section is inspired by Vondera/Shopify.
 - **Premium Glassmorphism:** Never just use `backdrop-blur`. Always pair it with a semi-transparent border and an inner shadow: `bg-surface/50 backdrop-blur-xl border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]`.
 - **Framer Motion Springs:** Eradicate generic `ease` transitions. Use Spring Physics: `{ type: "spring", stiffness: 300, damping: 30 }` for all interactive element entrances.
 - **The "No-Jitter" Flip:** Dynamic changing text MUST be wrapped in a "Stable Dimension Wrapper" (Invisible Longest Word) to ensure ZERO Layout Thrashing (CLS = 0.0).
+- **Fake UI & Mockups:** Guidelines for rendering complex "Fake UIs" (Dashboards/Storefronts) using Real JSON Data Components instead of heavy SVGs, utilizing Framer Motion for `LayoutId` cross-fades and smooth state transitions.
+- **Active States:** Enforce strict visual hierarchies for interactive elements (e.g., active tabs receive a `#3B82F6` border glow and elevated glassmorphism, inactive tabs remain muted at `opacity-70`).
 
 ## 🌐 6. i18n & ACCESSIBILITY (a11y)
 

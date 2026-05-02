@@ -88,6 +88,21 @@ Deploy a world-class, side-aligned B2B2C SaaS Landing Page mirroring Shopify/Von
   - **Footer:** 4-column semantic grid. 1px gradient top border.
   - **API Contract:** Build the lead capture endpoint enforcing `Zod` validation and `Idempotency-Key` via Upstash/Redis.
 
+## 🌟 9. PHASE 9: FEATURES INFRASTRUCTURE & HERO (RSC)
+
+- **Focus:** Core Layout & Streaming SSR.
+- **Action:** Build the `/features` page shell. Use Server Components (RSC) for zero JS bundle size. Implement `loading.tsx` to serve high-fidelity Skeleton UIs instantly. Ensure the Hero section aligns with the side-aligned authority blueprint.
+
+## 🍱 10. PHASE 10: INTERACTIVE BENTO SHOWCASE & TIME SLICING (ISLANDS)
+
+- **Focus:** Concurrent Rendering & Fake UI logic.
+- **Action:** Implement Islands Architecture (`"use client"`) for the interactive feature tabs. As the user switches sectors (Fashion, Electronics, Food), the Fake UI Mockup must update dynamically. You MUST use `useTransition` for these filtering/swapping mechanisms to prevent Task Starvation and ensure 60fps responsiveness.
+
+## 🗄️ 11. PHASE 11: DEEP DIVE DRAWERS & MICRO-INTERACTIONS
+
+- **Focus:** Accessible Overlays & Event Loop Safety.
+- **Action:** Integrate `Vaul` for highly performant, accessible Drawers to show extended feature details. Ensure zero Memory Leaks (proper cleanup functions) and zero Layout Thrashing inside Drawer animations.
+
 ---
 
 # 🚦 EXECUTION COMMAND

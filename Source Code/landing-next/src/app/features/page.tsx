@@ -1,25 +1,28 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { GlobalFooter } from "@/components/sections/GlobalFooter";
-import { FeaturesHero } from "@/components/sections/FeaturesHero";
-import { InteractiveDashboard } from "@/components/sections/InteractiveDashboard";
-import { MultiSectorShowcase } from "@/components/sections/MultiSectorShowcase";
-import { MobileReadiness } from "@/components/sections/MobileReadiness";
+import { FeaturesCosmicBackground } from "@/components/features-islands/FeaturesCosmicBackground";
+import { FeaturesClientOrchestrator } from "./FeaturesClientOrchestrator";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Features | Matgarco - Command Your Commerce Ecosystem",
+  description: "One Platform. Complete E-Commerce Ecosystem.",
+};
 
 export default function FeaturesPage() {
   return (
-    <div className="flex flex-col min-h-screen font-sans">
-      <Navbar />
-      
-      <main className="flex-grow">
-        <FeaturesHero />
-        <InteractiveDashboard />
-        <MultiSectorShowcase />
-        <MobileReadiness />
-        
-      </main>
+    <main className="relative w-full min-h-screen">
+      {/* 1. FIXED COSMIC ENGINE */}
+      <FeaturesCosmicBackground />
 
+      {/* 2. GLOBAL NAVIGATION */}
+      <Navbar />
+
+      {/* 3 & 4. CLIENT ORCHESTRATOR FOR i18n SYNC */}
+      <FeaturesClientOrchestrator />
+
+      {/* 5. GLOBAL FOOTER */}
       <GlobalFooter />
-    </div>
+    </main>
   );
 }

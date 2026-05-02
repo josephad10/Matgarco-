@@ -280,8 +280,6 @@ export const en: Translations = {
     ]
   },
 
-
-
   // Footer
   footer: {
     description: "The all-in-one e-commerce platform empowering businesses to grow, scale, and succeed in the digital marketplace.",
@@ -408,4 +406,85 @@ export const en: Translations = {
     teamTitle: "A Team That Believes in Impact",
     teamSubtitle: "Engineers, designers, and marketers working together to build the best e-commerce experience.",
   },
+
+  featuresHero: {
+    titleHighlight: "One Platform. ",
+    titleMain: "Complete E-Commerce Ecosystem.",
+    subtitle: "Empowering merchants with advanced inventory management, engaging customer storefronts, and deep AI-driven analytics. Built to scale.",
+    ctaPrimary: "Start Free Trial"
+  },
+  featuresBento: {
+    tabs: { merchant: "Merchant Hub", customer: "Customer Storefront", admin: "Platform Control" },
+    learnMore: "Explore Module",
+    merchantCards: [
+      { title: "Inventory & Products", desc: "Manage variants, categories, and monitor real-time stock levels effortlessly." },
+      { title: "Advanced Analytics", desc: "Interactive dashboards for KPIs, total revenue, and visitor demographics." },
+      { title: "Team Management", desc: "Secure role-based access control for employees and order managers." }
+    ],
+    customerCards: [
+      { title: "Bilingual Experience", desc: "Fully localized Arabic and English interfaces for wider reach." },
+      { title: "Smart Search", desc: "High-performance filtering by price, category, and specifications." },
+      { title: "Live Order Tracking", desc: "Customers track shipments in real-time via a dedicated portal." }
+    ],
+    adminCards: [
+      { title: "Subscription Management", desc: "Handle merchant billing cycles, renewals, and tier upgrades." },
+      { title: "System Health", desc: "Master dashboard to oversee platform performance and active stores." },
+      { title: "Automated Notifications", desc: "AI-driven email and SMS updates for system alerts and logs." }
+    ]
+  },
+  workspaceShowcase: {
+    badge: "Advanced Workspace",
+    heading: "Full Control Over Every Detail",
+    items: [
+      { id: "dashboard", title: "Comprehensive Dashboard", desc: "A live overview of your sales, visits, and the most important daily tasks." },
+      { id: "orders", title: "Advanced Order Management", desc: "Track shipments, issue invoices, and update order statuses with a single click." },
+      { id: "customization", title: "Interface Customization", desc: "Control colors, fonts, and the layout of your store to match your brand identity." }
+    ]
+  },
+  sectorShowcase: {
+    badge: "Tailored For You",
+    titleStart: "Whatever your business, ",
+    titleBrand: "Matgarco",
+    titleEnd: " fits perfectly.",
+    subtitle: "Our engine doesn't rely on a single interface. It gives you the flexibility to design a store that perfectly serves your industry.",
+    sectors: {
+      fashion: "Fashion & Clothing",
+      electronics: "Electronics",
+      cosmetics: "Cosmetics",
+      food: "Food & Beverages",
+      home: "Home Products",
+      handmade: "Handmade Products",
+      accessories: "Accessories"
+    },
+    fakeUI: {
+      fashionDesc: "Templates designed to highlight intricate clothing details with an advanced system for size and color variants.",
+      electronicsDesc: "Interfaces focused on technical specifications, product comparisons, and detailed customer reviews.",
+      foodDesc: "Appetizing designs with support for quick ordering, add-ons, and delivery tracking.",
+      homeDesc: "Templates that allow coordinating products within virtual rooms with the ability to buy the entire collection in one click.",
+      handmadeDesc: "Designs that highlight the product story, handcrafted details, and personal touches that make each piece unique.",
+      accessoriesDesc: "Interfaces focused on macro photography precision, metal and stone options, and suggested fashion coordination.",
+      cosmeticsDesc: "Advanced tools for virtual shade testing, skin type selection, and realistic makeup finishes."
+    }
+  },
+  workspace: {
+    totalRevenue: "Total Revenue",
+    revenueValue: "$124,500.00",
+    activeOrders: "Active Orders",
+    conversionRate: "Conversion Rate",
+    revenueOverview: "Revenue Overview",
+    recentOrders: "Recent Orders",
+    exportCsv: "Export CSV",
+    orderId: "Order ID",
+    customer: "Customer",
+    date: "Date",
+    status: "Status",
+    amount: "Amount",
+    vsLastMonth: "vs last month",
+    completed: "Completed",
+    pending: "Pending",
+    shipped: "Shipped",
+    cancelled: "Cancelled",
+    today: "Today",
+    yesterday: "Yesterday"
+  }
 };

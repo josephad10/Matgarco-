@@ -4,14 +4,22 @@ import dynamic from "next/dynamic";
 import { useEffect, useState, useRef } from "react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { motion } from "framer-motion";
+import * as THREE from "three";
 
 // Dynamically import react-globe.gl to prevent SSR "window is not defined" errors
 const Globe = dynamic(() => import("react-globe.gl"), { ssr: false });
 
-export function InteractiveGlobe() {
+interface InteractiveGlobeProps {
+  lang?: string;
+}
+
+export function InteractiveGlobe({ lang: propLang }: InteractiveGlobeProps) {
   const [mounted, setMounted] = useState(false);
   const globeRef = useRef<any>(null);
-  const { t } = useLanguage();
+  const { lang: contextLang, t: contextT } = useLanguage();
+  
+  const lang = propLang || contextLang;
+  const t = contextT;
 
   useEffect(() => {
     setMounted(true);
@@ -22,22 +30,33 @@ export function InteractiveGlobe() {
 
   useEffect(() => {
     if (mounted && globeRef.current) {
-      // Set initial point of view
-      globeRef.current.pointOfView({ lat: cairoLat - 10, lng: cairoLng, altitude: 2 }, 1000);
-      
       const globe = globeRef.current;
-      const enableRotation = () => {
+
+      // Set initial point of view
+      globe.pointOfView({ lat: cairoLat - 10, lng: cairoLng, altitude: 2 }, 1000);
+      
+      const enforcePhysics = () => {
         const controls = globe.controls();
         if (controls) {
+          // Force infinite smooth West-to-East rotation
           controls.autoRotate = true;
-          controls.autoRotateSpeed = -0.8; // Right-to-Left (West-to-East) rotation
-        } else {
-          // Retry if controls are not yet initialized
-          setTimeout(enableRotation, 100);
+          controls.autoRotateSpeed = 0.5;
+          
+          // Strict locking
+          controls.enableZoom = false;
+          controls.enablePan = false;
+          controls.minPolarAngle = Math.PI / 2.3;
+          controls.maxPolarAngle = Math.PI / 1.7;
+          
+          // CRITICAL FIX: Update must be called every frame for autoRotate to work!
+          controls.update(); 
         }
+        
+        requestAnimationFrame(enforcePhysics);
       };
       
-      enableRotation();
+      // Initiate the infinite physics loop
+      enforcePhysics();
     }
   }, [mounted, cairoLat, cairoLng]);
 

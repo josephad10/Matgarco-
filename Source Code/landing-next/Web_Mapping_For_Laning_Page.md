@@ -9,6 +9,9 @@ This map enforces a strict separation between Server Components (RSC) and Client
 ```text
 src/
 ├── app/                  (Core App Router)
+│   ├── features/
+│   │   ├── page.tsx               (Phase 9: RSC Main Features Page)
+│   │   └── loading.tsx            (Phase 9: Streaming SSR Skeletons)
 │   ├── api/lead/         (Phase 8: Backend Lead capture endpoint)
 │   │   └── route.ts
 │   ├── globals.css       (Phase 0: Dark Authority Theme variables)
@@ -31,7 +34,10 @@ src/
     │   ├── SectorShowcaseSection.tsx(Phase 5 Wrapper)
     │   ├── PricingSection.tsx       (Phase 6 Wrapper)
     │   └── SocialProofSection.tsx   (Phase 7 Wrapper for Mobile & Testimonials)
-    └── islands/          (STRICTLY Client Components / "use client")
+    ├── features-sections/         (RSC Wrappers)
+    │   ├── FeaturesHero.tsx       (Phase 9)
+    │   └── SectorDeepDive.tsx     (Phase 11)
+    ├── islands/          (STRICTLY Client Components / "use client")
         ├── LangToggle.tsx           (Phase 0: Language switcher)
         ├── HeroWordFlip.tsx         (Phase 1: Dynamic text animation)
         ├── ParallaxWrapper.tsx      (Phase 2: Mouse tracking physics)
@@ -39,6 +45,9 @@ src/
         ├── MarqueeEngine.tsx        (Phase 3: Card-based infinite marquee)
         ├── SectorTabs.tsx           (Phase 5: Framer motion cross-fades)
         └── TestimonialsCarousel.tsx (Phase 7: Embla Carousel engine)
+    └── features-islands/          (Client Components)
+        ├── InteractiveMockup.tsx  (Phase 10: JSON-driven Fake UI)
+        └── FeatureDrawer.tsx      (Phase 11: Vaul integration)
 ```
 
 > **⚠️ i18n ENFORCEMENT:** ALL user-visible strings MUST be sourced from `src/i18n/ar.ts` and `src/i18n/en.ts`. Hardcoded text in JSX is a CONSTITUTIONAL VIOLATION. Client Islands access strings via `useLanguage()` hook.

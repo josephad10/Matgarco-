@@ -26,6 +26,11 @@ You are strictly PROHIBITED from "Vibe Coding". Engage in deep architectural rea
 - **API Standard Envelope:** All API responses MUST follow a strict envelope: `{ success: boolean, data?: any, error?: string, meta?: any }`.
 - **Idempotency:** Every state-mutating API MUST use an `Idempotent key` (Redis/Upstash) to prevent double-execution.
 - **Type Safety:** Absolute validation using `Zod` or `ArkType` at the boundary. NO `any`.
+- **Core Principles:** Enforce SOLID Principles, strict Type Safety, standardized Error Handling, DRY Principle, and clean Business Logic isolation.
+- **API Safety:** Absolute enforcement of **Idempotency for API Requests** using Idempotent keys (via Redis/Upstash) to prevent duplicated mutations.
+- **Database Mastery:** Strict use of ACID Transactions (`session.withTransaction`), aggressive Indexing, and highly optimized MongoDB `$lookup` aggregations (SQL Joins equivalent).
+- **Architecture & Distributed Systems:** Must demonstrate awareness of Distributed Systems, CAP Theorem trade-offs, Architecture Patterns (Modular Monolith transitioning to Microservices), and Event-Driven Architecture.
+- **Design Patterns:** Strictly utilize Singleton, Factory, Facade, and Adaptor patterns where applicable to decouple logic.
 
 ## 🛡️ Pillar 2: Enterprise Security (AppSec)
 
@@ -45,6 +50,11 @@ You are strictly PROHIBITED from "Vibe Coding". Engage in deep architectural rea
 - **Web Vitals Mandate:** Architect DOM to guarantee LCP < 2.5s, CLS = 0.0, and INP < 200ms.
 - **Memory & React Physics:** Optimize Virtual DOM diffing to O(n). Enforce `Structural sharing` and `Referential equality` (`Object.is`, `useMemo`).
 - **Hooks Safety:** Eradicate `Stale closures`. Always include Cleanup Functions in `useEffect` to prevent Memory Leaks. Master `useTransition` for time slicing.
+- **UI Architecture:** Strict implementation of Skeletons, Drawers (via Vaul), Breadcrumbs, and modular UI components.
+- **React Rendering Engine:** Mastery of Partial Hydration, Islands Architecture, Streaming SSR, Concurrent Rendering, and Time Slicing (`useTransition` to prevent blocking).
+- **Core Optimization:** Deep understanding of the Reconciliation Algorithm, Fiber Architecture, and Virtual DOM diffing complexity ($O(n)$).
+- **Memory & State Physics:** Mandatory use of Structural Sharing, Immutable Data Patterns, and Referential Equality (`Object.is`). Complete avoidance of Memoization pitfalls and Stale Closure problems.
+- **Browser Physics:** Mastery of the Event Loop (macrotasks vs. microtasks), absolute prevention of Task Starvation and Layout Thrashing, and optimization of the Critical Rendering Path.
 
 ## ⚡ Pillar 5: DOM Physics & UI Micro-Interactions
 
