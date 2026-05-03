@@ -58,26 +58,26 @@ export function WorkspaceShowcase({ lang }: WorkspaceShowcaseProps) {
             </div>
 
             {/* Chart Area */}
-            <div className="flex-1 min-h-[200px] bg-white/[0.02] border border-white/5 rounded-xl p-5 flex flex-col relative overflow-hidden">
+            <div className="flex-1 min-h-[200px] bg-slate-50 border border-white/10 shadow-[inset_0_2px_20px_rgba(0,0,0,0.05)] rounded-xl p-5 flex flex-col relative overflow-hidden">
               <div className="flex justify-between items-center mb-6 z-10">
-                <span className="text-xs font-bold text-white/70">{t.workspace.revenueOverview}</span>
+                <span className="text-xs font-bold text-slate-500">{t.workspace.revenueOverview}</span>
                 <div className="flex gap-2">
-                  <div className="px-3 py-1.5 bg-white/10 rounded-md text-[10px] font-bold text-white cursor-pointer shadow-sm">{isRtl ? "أسبوعي" : "Weekly"}</div>
-                  <div className="px-3 py-1.5 rounded-md text-[10px] font-medium text-white/40 hover:text-white/70 cursor-pointer">{isRtl ? "شهري" : "Monthly"}</div>
+                  <div className="px-3 py-1.5 bg-slate-200/50 rounded-md text-[10px] font-bold text-slate-800 cursor-pointer shadow-sm">{isRtl ? "أسبوعي" : "Weekly"}</div>
+                  <div className="px-3 py-1.5 rounded-md text-[10px] font-medium text-slate-400 hover:text-slate-600 cursor-pointer">{isRtl ? "شهري" : "Monthly"}</div>
                 </div>
               </div>
               
               {/* Grid Lines */}
               <div className="absolute inset-0 pt-16 pb-8 px-5 flex flex-col justify-between pointer-events-none">
-                {[1,2,3,4].map(i => <div key={i} className="w-full h-[1px] bg-white/5" />)}
+                {[1,2,3,4].map(i => <div key={i} className="w-full h-[1px] bg-slate-200/50" />)}
               </div>
 
               <div className="flex-1 flex items-end justify-between gap-1 sm:gap-2 z-10 pt-4">
                 {[30, 45, 25, 60, 75, 50, 85, 40, 95, 65, 55, 80, 45, 70, 88].map((h, idx) => (
                   <div key={idx} className="w-full flex flex-col items-center gap-2 group cursor-pointer h-full">
-                    <div className="w-full max-w-[24px] bg-white/[0.03] rounded-t-sm relative flex items-end justify-center h-full group-hover:bg-white/10 transition-colors">
+                    <div className="w-full max-w-[24px] bg-slate-200/20 rounded-t-sm relative flex items-end justify-center h-full group-hover:bg-slate-200/40 transition-colors">
                       <div
-                        className="w-full bg-gradient-to-t from-[#000080] to-[#3B82F6] rounded-t-sm group-hover:to-blue-300 transition-colors shadow-[0_0_10px_rgba(59,130,246,0.1)] group-hover:shadow-[0_0_15px_rgba(59,130,246,0.4)]"
+                        className="w-full bg-gradient-to-t from-[#000080] to-[#3B82F6] rounded-t-sm group-hover:to-blue-400 transition-colors shadow-[0_0_10px_rgba(59,130,246,0.1)] group-hover:shadow-[0_0_15px_rgba(59,130,246,0.3)]"
                         style={{ height: `${h}%` }}
                       />
                     </div>
@@ -105,9 +105,9 @@ export function WorkspaceShowcase({ lang }: WorkspaceShowcaseProps) {
               </button>
             </div>
             
-            <div className="flex-1 bg-white/[0.02] border border-white/5 rounded-xl flex flex-col overflow-hidden">
+            <div className="flex-1 bg-slate-50 border border-white/10 shadow-[inset_0_2px_20px_rgba(0,0,0,0.05)] rounded-xl flex flex-col overflow-hidden">
               {/* Table Header */}
-              <div className="grid grid-cols-5 gap-4 px-4 py-3 border-b border-white/10 bg-white/[0.02] text-[10px] font-bold text-white/40 uppercase tracking-wider shrink-0">
+              <div className="grid grid-cols-5 gap-4 px-4 py-3 border-b border-slate-200/60 bg-slate-100/50 text-[10px] font-bold text-slate-500 uppercase tracking-wider shrink-0">
                 <div>{t.workspace.orderId}</div>
                 <div>{t.workspace.customer}</div>
                 <div>{t.workspace.date}</div>
@@ -116,7 +116,7 @@ export function WorkspaceShowcase({ lang }: WorkspaceShowcaseProps) {
               </div>
 
               {/* Table Rows */}
-              <div className="flex flex-col divide-y divide-white/5 overflow-y-auto custom-scrollbar flex-1">
+              <div className="flex flex-col divide-y divide-slate-100 overflow-y-auto custom-scrollbar flex-1">
                 {[
                   { id: "#ORD-001", customer: "Ahmed Hassan", date: `${t.workspace.today}, 10:42 AM`, status: t.workspace.completed, amount: isRtl ? "1,250 ج.م" : "$45.00" },
                   { id: "#ORD-002", customer: "Sarah Magdy", date: `${t.workspace.today}, 09:15 AM`, status: t.workspace.pending, amount: isRtl ? "450 ج.م" : "$15.00" },
@@ -124,26 +124,26 @@ export function WorkspaceShowcase({ lang }: WorkspaceShowcaseProps) {
                   { id: "#ORD-004", customer: "Laila Tarek", date: t.workspace.yesterday, status: t.workspace.completed, amount: isRtl ? "850 ج.م" : "$28.00" },
                   { id: "#ORD-005", customer: "Kareem Ali", date: "Oct 12, 2026", status: t.workspace.cancelled, amount: isRtl ? "120 ج.م" : "$4.00" },
                 ].map((row, i) => (
-                  <div key={i} className="grid grid-cols-5 gap-4 px-4 py-3.5 items-center hover:bg-white/[0.04] transition-colors text-xs text-white/80 cursor-pointer group">
-                    <div className="font-mono text-blue-400 font-medium group-hover:text-blue-300 transition-colors">{row.id}</div>
+                  <div key={i} className="grid grid-cols-5 gap-4 px-4 py-3.5 items-center hover:bg-slate-100/50 transition-colors text-xs text-slate-700 cursor-pointer group">
+                    <div className="font-mono text-blue-600 font-medium group-hover:text-blue-500 transition-colors">{row.id}</div>
                     <div className="flex items-center gap-2.5">
-                      <div className="w-6 h-6 rounded-full bg-gradient-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center text-[9px] font-bold shadow-inner">
+                      <div className="w-6 h-6 rounded-full bg-slate-200/50 border border-slate-200 flex items-center justify-center text-[9px] font-bold text-slate-600 shadow-inner">
                         {row.customer.charAt(0)}
                       </div>
                       <span className="truncate font-medium">{row.customer}</span>
                     </div>
-                    <div className="text-white/40 text-[10px] font-medium">{row.date}</div>
+                    <div className="text-slate-500 text-[10px] font-medium">{row.date}</div>
                     <div>
                       <span className={`inline-flex items-center justify-center px-2 py-0.5 rounded-full text-[9px] font-bold border ${
-                        row.status === t.workspace.completed ? 'bg-green-500/10 text-green-400 border-green-500/20 shadow-[0_0_10px_rgba(74,222,128,0.2)]' :
-                        row.status === t.workspace.pending ? 'bg-orange-500/10 text-orange-400 border-orange-500/20 shadow-[0_0_10px_rgba(249,115,22,0.2)]' :
-                        row.status === t.workspace.shipped ? 'bg-blue-500/10 text-blue-400 border-blue-500/20 shadow-[0_0_100px_rgba(59,130,246,0.2)]' :
-                        'bg-red-500/10 text-red-400 border-red-500/20 shadow-[0_0_10px_rgba(239,68,68,0.2)]'
+                        row.status === t.workspace.completed ? 'bg-green-50 text-green-600 border-green-200 shadow-sm' :
+                        row.status === t.workspace.pending ? 'bg-orange-50 text-orange-600 border-orange-200 shadow-sm' :
+                        row.status === t.workspace.shipped ? 'bg-blue-50 text-blue-600 border-blue-200 shadow-sm' :
+                        'bg-red-50 text-red-600 border-red-200 shadow-sm'
                       }`}>
                         {row.status}
                       </span>
                     </div>
-                    <div className="text-right font-bold tracking-tight">{row.amount}</div>
+                    <div className="text-right font-black text-slate-800 tracking-tight">{row.amount}</div>
                   </div>
                 ))}
               </div>
@@ -161,27 +161,27 @@ export function WorkspaceShowcase({ lang }: WorkspaceShowcaseProps) {
             transition={springTransition}
             className="flex h-full"
           >
-            {/* Left: Tools Panel */}
-            <div className="w-2/5 border-r border-white/5 p-6 flex flex-col gap-8 bg-white/[0.01] overflow-y-auto custom-scrollbar relative z-10 backdrop-blur-sm">
+            {/* Left: Tools Panel (Now Light) */}
+            <div className="w-2/5 border-r border-slate-200 p-6 flex flex-col gap-8 bg-slate-50 overflow-y-auto custom-scrollbar relative z-10 shadow-[inset_-2px_0_10px_rgba(0,0,0,0.05)]">
               <div>
-                <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-4 block">Theme Colors</span>
+                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-4 block">Theme Colors</span>
                 <div className="flex gap-3">
                   {['bg-[#050505]', 'bg-[#3B82F6]', 'bg-[#10B981]', 'bg-[#F59E0B]', 'bg-[#EC4899]'].map((color, i) => (
-                    <div key={i} className={`w-7 h-7 rounded-full ${color} cursor-pointer shadow-lg transition-transform ${i===1 ? 'ring-2 ring-white ring-offset-2 ring-offset-[#0a0a0a]' : 'border border-white/20 hover:scale-110'}`} />
+                    <div key={i} className={`w-7 h-7 rounded-full ${color} cursor-pointer shadow-lg transition-transform ${i===1 ? 'ring-2 ring-blue-500 ring-offset-2 ring-offset-white' : 'border border-slate-200 hover:scale-110'}`} />
                   ))}
                 </div>
               </div>
 
               <div>
-                <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-4 block">Typography</span>
-                <div className="bg-white/5 border border-white/10 rounded-lg p-2.5 flex items-center justify-between text-xs text-white/80 cursor-pointer hover:bg-white/10 transition-colors shadow-inner">
+                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-4 block">Typography</span>
+                <div className="bg-slate-100 border border-slate-200 rounded-lg p-2.5 flex items-center justify-between text-xs text-slate-700 cursor-pointer hover:bg-slate-200 transition-colors shadow-sm">
                   <span className="font-medium">Inter (Sans-Serif)</span>
-                  <div className="w-2.5 h-2.5 border-b-2 border-r-2 border-white/40 rotate-45 mr-1" />
+                  <div className="w-2.5 h-2.5 border-b-2 border-r-2 border-slate-400 rotate-45 mr-1" />
                 </div>
               </div>
 
               <div>
-                <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-4 block">Component Settings</span>
+                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-4 block">Component Settings</span>
                 <div className="flex flex-col gap-4">
                   {[
                     { label: "Sticky Header", active: true },
@@ -190,8 +190,8 @@ export function WorkspaceShowcase({ lang }: WorkspaceShowcaseProps) {
                     { label: "Dark Mode Default", active: true },
                   ].map((toggle, i) => (
                     <div key={i} className="flex justify-between items-center group cursor-pointer">
-                      <span className="text-xs text-white/60 font-medium group-hover:text-white/90 transition-colors">{toggle.label}</span>
-                      <div className={`w-8 h-4.5 rounded-full ${toggle.active ? 'bg-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.5)]' : 'bg-white/10 border border-white/10'} relative transition-colors`}>
+                      <span className="text-xs text-slate-600 font-medium group-hover:text-slate-900 transition-colors">{toggle.label}</span>
+                      <div className={`w-8 h-4.5 rounded-full ${toggle.active ? 'bg-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.3)]' : 'bg-slate-200 border border-slate-300'} relative transition-colors`}>
                         <div className={`w-3.5 h-3.5 rounded-full bg-white absolute top-[2px] transition-all duration-300 shadow-sm ${toggle.active ? 'right-[2px]' : 'left-[2px] opacity-70'}`} />
                       </div>
                     </div>
@@ -200,12 +200,15 @@ export function WorkspaceShowcase({ lang }: WorkspaceShowcaseProps) {
               </div>
             </div>
 
-            {/* Right: Storefront Wireframe */}
-            <div className="w-3/5 p-6 flex flex-col items-center justify-center bg-black/60 relative overflow-hidden">
+            {/* Right: Storefront Wireframe (Now Dark Preview) */}
+            <div className="w-3/5 p-6 flex flex-col items-center justify-center bg-[#050505] relative overflow-hidden">
               {/* Grid Background pattern */}
               <div className="absolute inset-0 bg-[radial-gradient(#ffffff11_1px,transparent_1px)] [background-size:16px_16px]" />
               
-              <div className="w-full max-w-[240px] aspect-[9/18] bg-[#050505] border border-white/20 rounded-[2.5rem] p-3 flex flex-col gap-3 shadow-[0_0_40px_rgba(0,0,0,0.8)] relative z-10 ring-4 ring-white/5 overflow-y-hidden">
+              {/* Central Glow */}
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#00008015_0%,transparent_70%)]" />
+              
+              <div className="w-full max-w-[240px] aspect-[9/18] bg-[#050505] border border-white/20 rounded-[2.5rem] p-3 flex flex-col gap-3 shadow-[0_0_50px_rgba(0,0,0,0.8)] relative z-10 ring-4 ring-white/5 overflow-y-hidden">
                 {/* Mobile Notch */}
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-5 bg-black rounded-b-2xl z-20 flex justify-center items-center">
                    <div className="w-8 h-1 rounded-full bg-white/10" />

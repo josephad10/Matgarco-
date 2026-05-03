@@ -51,3 +51,37 @@ src/
 ```
 
 > **⚠️ i18n ENFORCEMENT:** ALL user-visible strings MUST be sourced from `src/i18n/ar.ts` and `src/i18n/en.ts`. Hardcoded text in JSX is a CONSTITUTIONAL VIOLATION. Client Islands access strings via `useLanguage()` hook.
+
+---
+
+## 📌 Phase 13 Addendum: Pricing Page Route Mapping
+
+```text
+src/
+└── components/
+    ├── pricing-islands/           (Phase 13: STRICTLY Client Components)
+        ├── PricingToggle.tsx      (State controller for Monthly/Annual)
+        ├── PricingCards.tsx       (The 3 Main Subscription Tiers)
+        ├── ComparisonMatrix.tsx   (Deep Dive CSS Grid Table)
+        └── PricingFAQ.tsx         (Interactive Accordions)
+```
+
+> **⚠️ Pricing Integrity:** ALL prices MUST be sourced from `t.pricingPage.*` dictionary keys. Direct numeric literals in JSX are a CONSTITUTIONAL VIOLATION under the Phase 13 Pricing UI Constitution.
+
+### Phase 13 V2 — Component Responsibility Refinement
+
+```text
+src/
+└── components/
+    ├── pricing-islands/                    (Phase 13: STRICTLY Client Components)
+        ├── PricingToggle.tsx               (Zustand-connected billing cycle switcher — drives ALL price displays)
+        ├── PricingCards.tsx                (3 Tiers: Lite/Pro/Prime with dynamic price injection from t.pricingPage.*)
+        ├── ComparisonMatrix.tsx            (Sticky-header CSS Grid table — pre-defined column widths, zero JS sizing)
+        └── PricingFAQ.tsx                  (Trust-building accordions: "14-Day Free Trial", "No CC Required", VAT info)
+```
+
+> **Component Contracts:**
+>
+> - `PricingToggle.tsx` → Writes `billingCycle: "monthly" | "annual"` to Zustand. Never emits prices directly.
+> - `PricingCards.tsx` → Reads `billingCycle` from Zustand. Never holds billing state internally (SRP).
+> - `ComparisonMatrix.tsx` → Pure presentational RSC-compatible component. Receives static feature data as props.

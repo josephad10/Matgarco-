@@ -5,6 +5,7 @@ import { FeaturesHero } from "@/components/features-sections/FeaturesHero";
 import { InteractiveBento } from "@/components/features-islands/InteractiveBento";
 import { WorkspaceShowcase } from "@/components/features-islands/WorkspaceShowcase";
 import { SectorShowcase } from "@/components/features-islands/SectorShowcase";
+import { ShippingIsland } from "@/components/features/ShippingIsland";
 
 /**
  * FeaturesClientOrchestrator
@@ -27,6 +28,9 @@ export function FeaturesClientOrchestrator() {
 
       {/* 6. SECTOR SHOWCASE (PHASE 11) */}
       <SectorShowcase lang={lang} />
+
+      {/* 7. LUXURY SHIPPING SECTION (PHASE 13) */}
+      <ShippingIsland />
     </>
   );
 }

@@ -81,3 +81,19 @@ When instructed to build or debug:
 ### TASK OUTPUT:
 
 Confirm that you have read, internalized, and successfully overwritten `AI_CONSTITUTION.md` with this exact text. State: "Sentinel Constitution V9.0 Engaged. Awaiting further commands."
+
+---
+
+### 4. Pricing & Billing UI Constitution
+
+- **Dynamic State Fidelity:** The Monthly/Annual toggle must trigger strictly synchronized state updates across all rendered prices. Stale closures or UI mismatches here are considered SEVERE bugs.
+- **Zero Hallucination Pricing:** Never approximate or generate fake prices. Strict adherence to the 250/450/699 (Monthly) and 2500/4500/6999 (Annual) EGP structure is mandatory.
+- **Matrix Layout Performance:** The Comparison Matrix MUST be built using standard `CSS Grid`. Absolutely avoid deeply nested flexboxes or expensive DOM calculations to prevent Layout Thrashing and ensure CLS = 0.0 when scrolling the massive table.
+- **Security as a Feature:** Ensure tier highlights clearly communicate security boundaries (e.g., "3 Users (RBAC)" for Pro, "10 Users + Audit Logs" for Prime).
+
+#### Phase 13 V2 Guardrail Additions
+
+- **State Synchronization (Zustand):** The Monthly/Annual toggle MUST connect to a Zustand slice. Direct `useState` for global billing cycle is prohibited — it causes stale closures across islands.
+- **Performance Constraint Precision:** CLS target is `< 0.1`. The Comparison Matrix must use `CSS Grid` with pre-defined `grid-template-columns`. No JS-measured widths.
+- **Glocal Strategy:** Dynamic currency display (EN: USD equivalent, AR: EGP) enforced strictly via `t.pricingPage.*` dictionary mappings. Never use conditional JSX currency literals outside the dictionary layer.
+- **AI Credit Rollover Fidelity:** The Prime tier's "Rollover" credit benefit MUST be visually distinguished (e.g., a `✦` badge or a distinct tooltip) to reinforce its premium positioning.

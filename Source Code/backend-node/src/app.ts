@@ -26,6 +26,7 @@ import payoutRoutes from './routes/payout.routes';
 import storeThemeRoutes from './routes/storeTheme.routes';
 import publicThemesRoutes from './routes/publicThemes.routes';
 import publicRoutes from './routes/public.routes';
+import contactRoutes from './routes/contact.routes';
 
 const app: Application = express();
 
@@ -116,6 +117,9 @@ app.use('/api/themes', publicThemesRoutes);
 // Public unauthenticated routes — mounted last among route declarations
 // to signal explicitly that no auth middleware is applied to this prefix.
 app.use('/api/public', publicRoutes);
+
+// Contact form route — self-contained CORS, JSON parsing, and rate limiting
+app.use('/api/contact', contactRoutes);
 
 // 404 handler
 app.use(notFoundHandler);

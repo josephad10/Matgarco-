@@ -109,4 +109,34 @@ Deploy a world-class, side-aligned B2B2C SaaS Landing Page mirroring Shopify/Von
 
 1. Acknowledge this plan.
 2. Confirm the overwriting of `@workspace /IMPLEMENTATION_PLAN.md`.
+
 3. State: "Master Plan V5.0 Engaged. Standing by for the Master Execution Prompt to begin coding."
+
+---
+
+## 💎 13. PHASE 13: SAAS PRICING ENGINE (SHOPIFY/VONDERA TIER)
+
+- **Focus:** High-conversion billing UI, strictly synchronized state, and CSS Grid Matrix.
+- **Business Logic (Strictly Locked - DO NOT RECALCULATE):**
+  - **Matgar Lite (Khotwa):** 250 EGP/mo | 2500 EGP/yr. (2% Commission, 100 Products, 30 AI Credits).
+  - **Matgar Pro (Intilaq):** 450 EGP/mo | 4500 EGP/yr. (0% Commission, Unlimited Products, 100 AI Credits). **(Mark as Optimal/Most Popular)**.
+  - **Matgar Prime (Al Qamma):** 699 EGP/mo | 6999 EGP/yr. (0% Commission, Unlimited Products, 300 AI Credits).
+  - _Note:_ Feature limits remain EXACTLY the same regardless of billing cycle. All prices are VAT inclusive.
+- **Sub-Phases for Execution:**
+  1. **Pricing Hero & Billing Toggle:** Dynamic state toggle (Monthly/Annual) using strict Framer Motion spring physics.
+  2. **Tier Cards:** 3 Glassmorphic cards with distinct OLED Navy/Gold glows based on tier hierarchy.
+  3. **Deep Comparison Matrix:** A granular, sticky-header standard CSS Grid table mapping the extensive CSV feature rows.
+  4. **Trust Anchors & FAQ:** Accordion FAQ ensuring "No CC Required" and "14-Day Free Trial" are highly visible.
+
+### Phase 13 V2 — Vondera-Tier Execution Refinement
+
+- **Refined Business Logic (Additive Clarifications):**
+  - **Lite (Khotwa):** 250 EGP/mo | 2500 EGP/yr. (2% Transaction Fee, 100 Products, 30 AI Credits).
+  - **Pro (Intilaq):** 450 EGP/mo | 4500 EGP/yr. (0% Fee, Unlimited Products, 100 AI Credits). **[Optimal Choice — Scale to 1.05]**.
+  - **Prime (Al Qamma):** 699 EGP/mo | 6999 EGP/yr. (0% Fee, Unlimited Products, 300 AI Credits + **Rollover**).
+  - _Unified Logic (Clarification):_ All prices are VAT inclusive (14%). Features are identical across billing cycles; **only the price value toggles** — feature counts never change.
+- **Execution Refinements:**
+  1. **Billing Toggle:** Fluid Apple-style switch with Framer Motion spring physics, Zustand-connected global state.
+  2. **Tier Cards:** Navy/Gold depth glows; Pro card receives `scale(1.05)` + `shadow-[0_0_60px_rgba(59,130,246,0.4)]`.
+  3. **Comparison Matrix:** Sticky column headers, CSS Grid (zero JS layout calculations), CLS target < 0.1.
+  4. **Glocal Strategy:** EN displays USD equivalents, AR displays EGP. Driven strictly by `t.pricingPage.*` dictionary — never hardcoded.

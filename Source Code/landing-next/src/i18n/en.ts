@@ -327,10 +327,54 @@ export const en: Translations = {
     mobileTitle2: "From Any Screen",
     mobileSubtitle: "Matgarco is designed with a \"Mobile-First\" methodology. This means your store will look stunning and fast for your customers on their phones, while your dashboard is flexible enough to track your profits and manage orders from your mobile easily.",
     mobileCta: "Start Your Free Store",
+    shippingSection: {
+      category: "Logistics & Shipping",
+      title: "Ship your orders with a click, at the best local rates",
+      desc: "Deliver your products to customers across Egypt with ease. Choose between using Matgarco's central account for simplified billing, or link your private accounts with carriers like Bosta and Aramex directly via API for automated label printing and real-time tracking.",
+      cards: [
+        "Comprehensive Local Shipping",
+        "Bosta & Aramex Integration",
+        "Automated Shipment Tracking"
+      ]
+    }
   },
 
   // Pricing Page
   pricingPage: {
+    hero: {
+      title: "Launch today. Build your empire. Pay in EGP.",
+      subtitle: "Enjoy a 14-day free trial — no credit card required. Join 500+ merchants who chose price stability in EGP.",
+      offerBadge: "Limited Offer",
+      offerTitle: "3 months, all features, for 350 EGP/month",
+      offerSubtitle: "Launch with the full Matgarco experience for 3 months at half the price.",
+      offerTags: ["3-month package", "All features included", "Save 50%"],
+      offerPrice: "350",
+      offerCurrency: "EGP",
+      offerPeriod: "per month",
+      emailPlaceholder: "Enter your email address",
+      ctaButton: "Start for 14 days for free",
+      legalSubtext: "You agree to receive Matgarco marketing emails.",
+      hours: "Hours",
+      minutes: "Minutes",
+      seconds: "Seconds",
+      claimOffer: "Claim this offer",
+      originalPrice: "700",
+    },
+    toggle: { monthly: "Monthly", annual: "Annually", saveBadge: "Save 20%" },
+    cards: [
+      {
+        id: "lite", name: "Starter", subName: "(Lite)", badge: "For beginners & startups", monthlyPrice: "250", annualPrice: "2500", currency: "EGP", commission: "2% Sales Commission",
+        features: ["100 Active Products", "30 AI Content Credits", "Matgarco Quantus AI assistant", "Matgarco Subdomain", "1 Staff Account", "Basic Sales Reports"], cta: "Get Started", isPopular: false
+      },
+      {
+        id: "pro", name: "Professional", subName: "(Pro)", badge: "For businesses ready to scale", isPopular: true, popularLabel: "Most Popular", monthlyPrice: "450", annualPrice: "4500", currency: "EGP", commission: "0% Sales Commission (Zero)",
+        features: ["Unlimited Products", "100 AI Content Credits", "3 Staff Accounts (RBAC)", "Own Shipping API Keys", "Custom Theme Access", "Wholesale Engine (B2B)", "Abandoned Cart Recovery", "ROI Heatmaps & Analytics"], cta: "Get Started"
+      },
+      {
+        id: "prime", name: "Business", subName: "(Prime)", badge: "For established brands", monthlyPrice: "700", annualPrice: "7000", currency: "EGP", commission: "0% Sales Commission (Zero)",
+        features: ["Unlimited Products", "300 AI Credits (with Rollover)", "Full White-Labeling", "Custom Domain Mapping", "10 Staff Accounts + Audit Logs", "AI Competitor Price Watch", "Referral Engine", "Dedicated VIP Manager"], cta: "Get Started", isPopular: false
+      }
+    ],
     badge: "🎉 14-day free trial on all plans - No credit card required",
     heroTitle1: "Transparent Pricing That Grows with",
     heroTitle2: "Your Business",
@@ -347,11 +391,115 @@ export const en: Translations = {
     staff: "Staff Accounts",
     ai: "AI Credits",
     comparisonTitle: "Comprehensive Plan Comparison",
+    matrix: {
+      title: "Compare Features in Detail",
+      featureColumnLabel: "Feature",
+      headers: ["Starter (Lite)", "Professional (Pro)", "Business (Prime)"],
+      categories: [
+        {
+          name: "Store Setup & Visual Identity",
+          features: [
+            { name: "Active Product Capacity", lite: "100 Products", pro: "Unlimited", prime: "Unlimited" },
+            { name: "AI Store Setup", lite: "Matgarco Quantus AI assistant", pro: "Quantus AI + Pro Themes", prime: "Quantus AI + Full Store Cloning" },
+            { name: "Social Bridge (FB/IG Import)", lite: true, pro: true, prime: true },
+            { name: "Domain Customization", lite: "Matgarco Subdomain", pro: "Matgarco Subdomain", prime: "Custom Domain Mapping" },
+            { name: "Platform White-Labeling", lite: false, pro: true, prime: true }
+          ]
+        },
+        {
+          name: "Payments & Sales Commissions",
+          features: [
+            { name: "Platform Sales Commission", lite: "2% Per Order", pro: "0% (Zero Commission)", prime: "0% (Zero Commission)" },
+            { name: "Payment Gateways (Paymob, Instapay)", lite: true, pro: true, prime: true },
+            { name: "Cash on Delivery (COD)", lite: true, pro: true, prime: true },
+            { name: "Wholesale Engine (B2B Engine)", lite: false, pro: true, prime: true }
+          ]
+        },
+        {
+          name: "Shipping & Logistics Operations",
+          features: [
+            { name: "Shipping Providers Management", lite: "Matgarco Central Account", pro: "Link API Keys (Bosta/Aramex)", prime: "Link API + VIP Logistics Setup" },
+            { name: "Staff Accounts", lite: "Owner Account Only", pro: "3 Accounts (RBAC)", prime: "10 Accounts + Audit Logs" },
+            { name: "Automated Shipment Tracking", lite: "Basic", pro: "Advanced (SMS & Email)", prime: "Advanced (SMS & Email)" }
+          ]
+        },
+        {
+          name: "Matgarco Quantus AI assistant",
+          features: [
+            { name: "Monthly Content Generation Credits", lite: "30 Credits", pro: "100 Credits", prime: "300 Credits (with Rollover)" },
+            { name: "Content Copilot", lite: true, pro: true, prime: true },
+            { name: "Seasonal Growth Assistant", lite: false, pro: true, prime: true },
+            { name: "AI Price Watch (Competitor Monitoring)", lite: false, pro: false, prime: true }
+          ]
+        },
+        {
+          name: "Marketing & Analytics Tools",
+          features: [
+            { name: "Abandoned Cart Recovery", lite: "Basic System", pro: "Advanced Recovery", prime: "Advanced + Sentiment Analysis" },
+            { name: "Referrals & Loyalty System", lite: false, pro: false, prime: true },
+            { name: "Analytics & Reports", lite: "Basic Sales Reports", pro: "ROI & Heatmaps", prime: "Predictive Inventory" },
+            { name: "Technical Support Level", lite: "Standard Support", pro: "Priority Support", prime: "Dedicated VIP Manager" }
+          ]
+        }
+      ]
+    },
     comparisonSubtitle: "Discover the exact differences between the Starter, Growth, and Prime plans.",
     recommended: "Recommended for Pros",
     feature: "Feature",
     faqTitle: "Frequently Asked Questions",
     faqSubtitle: "Everything on your mind about plans and subscriptions.",
+    faqs: [
+      { q: "What is Matgarco?", a: "Matgarco is an integrated e-commerce platform specifically designed for the Egyptian and Arab markets. We provide everything you need to launch your store in minutes using our AI assistant (Quantus AI), with ready integration for payment gateways and shipping companies, so you can sell immediately without coding experience." },
+      { q: "What makes Matgarco different from Shopify?", a: "Unlike Shopify, which bills you in USD, Matgarco offers fixed pricing in EGP. Most importantly, we provide direct integration with local payments (Paymob, Instapay, Vodafone Cash) and locally known shipping companies without the need for coding or expensive plugins." },
+      { q: "How much does the subscription cost? Are there setup fees?", a: "There are no setup fees. Our plans start from 250 EGP per month (Starter plan). All prices include VAT and there are no hidden fees. You can also start with a 14-day free trial without entering a credit card." },
+      { q: "Does the platform take a commission on sales?", a: "On the (Professional) and (Business) plans, you keep 100% of your profits with 0% commission. On the entry-level (Starter) plan, we apply a nominal fee of 2% per order to cover the costs of using the central account." },
+      { q: "How does the shipping and delivery system work?", a: "We provide the option to use Matgarco's central account for direct dealing with major well-known shipping companies in one step, or you can link your own accounts (such as Bosta or Aramex) directly if you prefer." },
+      { q: "I currently sell on Facebook and Instagram, how do I move my products?", a: "We developed the (Social Bridge) feature specifically for you. You can import all your products, with their images and details, directly from your social media accounts to your new store with a single click." },
+      { q: "Can I link a custom domain to my store?", a: "Yes, on advanced plans you can link your own domain (e.g., www.yourbrand.com). On all plans, you will by default receive a free and secure subdomain from Matgarco." },
+      { q: "Is there a mobile app for store management?", a: "Yes, we provide a control panel that works with Progressive Web App (PWA) technology. This means you can manage your entire store from your mobile browser seamlessly with an experience similar to native apps, without the need to download an app from stores." },
+      { q: "Can I change my plan or cancel the subscription?", a: "Certainly. You can upgrade or downgrade your plan at any time from the control panel. If you decide the platform doesn't suit you, you can simply cancel the subscription without any obligations." },
+      { q: "What if I need help setting up the store?", a: "The (Quantus AI) assistant will create the store for you in minutes. If you need additional help, our technical support team is available to help you launch successfully." }
+    ],
+    finalCta: {
+      title: "Everything you need to succeed, all in one place",
+      features: [
+        { title: "Integrated Local Payments", desc: "Accept payments via Paymob, Instapay, and E-Wallets (Vodafone Cash) seamlessly and securely." },
+        { title: "Social Media Import", desc: "Move your products from Facebook and Instagram to your store in one click (Social Bridge)." },
+        { title: "Smart Setup in 3 Mins", desc: "No coding required. Let the Matgarco Quantus AI assistant build your entire store." },
+        { title: "Ready-to-use Shipping", desc: "Use our central shipping account or link directly with Bosta & Aramex." },
+        { title: "0% Sales Commission", desc: "On Pro and Prime plans, keep 100% of your profits with zero hidden fees on your sales." }
+      ],
+      ribbonText: [
+        "Launch your store today",
+        "14-Day Free Trial",
+        "Start your Matgarco journey",
+        "Matgarco"
+      ]
+    },
+    contactSection: {
+      mainTitle: "Ask whatever you have in your mind",
+      mainSubtitle: "Whether you have questions or are ready to discuss your business, we are here to help. Get in touch today.",
+      formTitle: "Get in Touch",
+      formSubtitle: "Fill out the form and we will get back to you as soon as possible.",
+      placeholders: {
+        name: "e.g., John Doe",
+        email: "example@mail.com",
+        phone: "+201xxxxxxxxx",
+        message: "Write your message here in detail..."
+      },
+      labels: { name: "Name", email: "Email Address", phone: "Phone Number (Optional)", message: "Message", send: "Send Message", sending: "Sending..." },
+      success: "Your message has been sent successfully! We will contact you shortly.",
+      error: "An error occurred while sending. Please try again.",
+      info: {
+        addressTitle: "Registered Commercial Address",
+        address: "12 Badr Buildings - Maadi - Cairo - Egypt",
+        phoneTitle: "Official Contact",
+        tel: "(+2) 01126871779",
+        email: "info@matgarco.io",
+        webTitle: "Digital Presence",
+        website: "www.matgarco.io"
+      }
+    }
   },
 
   // Solutions Page
@@ -486,5 +634,5 @@ export const en: Translations = {
     cancelled: "Cancelled",
     today: "Today",
     yesterday: "Yesterday"
-  }
+  },
 };

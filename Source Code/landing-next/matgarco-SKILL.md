@@ -70,3 +70,12 @@ The Hero section is inspired by Vondera/Shopify.
 1. Analyze this V7.0 blueprint and confirm your understanding of the RTL/LTR typography differences and the 8pt grid.
 2. Confirm overwriting of `@workspace /matgarco-landing-SKILL.md`.
 3. State: "Visual Masterpiece SKILL V7.0 Engaged. Ready for final Implementation Plan update."
+
+---
+
+## 🏦 7. SAAS BILLING & CONVERSION ARCHITECTURE
+
+- **SaaS Billing Architecture:** Capable of engineering complex Pricing Matrices, Toggle-based Price Injectors, and Vondera-grade comparative UI.
+- **Card Hierarchy Aesthetics:** Master of scaling and glowing elements to drive conversion (e.g., scaling the "Pro" card by `1.05`, adding a radiant `#3B82F6` inner shadow, and rendering standard tiers with muted `border-white/10`).
+- **SaaS Billing Engineering (V2):** Expert in complex Pricing Matrices, Zustand-connected Toggle-based Price Injectors, and conversion-optimized Card Hierarchies with tier-aware visual differentiation.
+- **Atmospheric Depth:** Skilled in applying OLED Navy glows (`shadow-[0_0_60px_rgba(0,0,128,0.4)]`) and `backdrop-blur-2xl` to ensure pricing cards "float" within the dark cosmic void — creating a premium sense of depth without borders.
