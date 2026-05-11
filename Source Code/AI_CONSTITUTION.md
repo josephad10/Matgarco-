@@ -97,3 +97,16 @@ Confirm that you have read, internalized, and successfully overwritten `AI_CONST
 - **Performance Constraint Precision:** CLS target is `< 0.1`. The Comparison Matrix must use `CSS Grid` with pre-defined `grid-template-columns`. No JS-measured widths.
 - **Glocal Strategy:** Dynamic currency display (EN: USD equivalent, AR: EGP) enforced strictly via `t.pricingPage.*` dictionary mappings. Never use conditional JSX currency literals outside the dictionary layer.
 - **AI Credit Rollover Fidelity:** The Prime tier's "Rollover" credit benefit MUST be visually distinguished (e.g., a `✦` badge or a distinct tooltip) to reinforce its premium positioning.
+
+## 4. The "Vondera Cinematic Authority" Pattern (For About/Team Sections)
+
+- **The Stage Spotlight:** Use a strict top-center radial gradient to simulate theater lighting. `bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white/10 via-[#050505] to-[#050505]`.
+- **Mega-Typography:** Unapologetically massive. Headings must range from `text-5xl` to `text-8xl` on desktop. `font-black`, extremely tight tracking (`tracking-tighter`), and leading (`leading-none` or `leading-[1.1]`).
+- **The Hook:** The final sentence of the hero story MUST break the white text pattern and use an electric gradient (e.g., `from-blue-500 to-emerald-400`) to anchor the eye.
+- **Cinematic Team Portraits:** Image wrappers MUST enforce `filter grayscale transition-all duration-500 hover:grayscale-0`. The info container beneath the photo must be a distinct Dark Slate (`bg-[#0a0a0a]`) with stark white text and a subtle colored bottom border (e.g., `border-b-2 border-blue-600`).
+
+## 5. The Products Mega-Hub & Advanced Interactions (V9.0 Addition)
+
+- **The Glass Curtain (Mega Menu):** All complex dropdowns MUST utilize Framer Motion's `<AnimatePresence>`. The curtain must enter and exit using highly polished `spring` physics (`damping: 20, stiffness: 100`) without causing layout thrashing.
+- **The USP Core (Quantus AI):** Matgarco's "Quantus AI" is not just a feature; it is the Autonomous eCommerce Architect. All UI components presenting Quantus AI must reflect advanced neural capabilities (Vision-to-Storefront API, Zero-Hallucination JSON).
+- **Product Pillars Integration:** Themes and Domains are the primary entry points (MVP Core). Matgarco Pay (InstaPay, Paymob) and Matgarco Ship (Bosta, Aramex) must be visually treated as deeply integrated infrastructure, not third-party plugins.

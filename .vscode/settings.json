@@ -1,0 +1,15 @@
+{
+  "eslint.workingDirectories": [
+    "./Source Code/landing-next",
+    "./Source Code/backend-node",
+    "./Source Code/dashboard-react"
+  ],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "eslint.validate": [
+    "typescript",
+    "typescriptreact",
+    "javascript",
+    "javascriptreact"
+  ]
+}

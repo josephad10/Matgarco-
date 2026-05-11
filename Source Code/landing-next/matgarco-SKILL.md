@@ -79,3 +79,16 @@ The Hero section is inspired by Vondera/Shopify.
 - **Card Hierarchy Aesthetics:** Master of scaling and glowing elements to drive conversion (e.g., scaling the "Pro" card by `1.05`, adding a radiant `#3B82F6` inner shadow, and rendering standard tiers with muted `border-white/10`).
 - **SaaS Billing Engineering (V2):** Expert in complex Pricing Matrices, Zustand-connected Toggle-based Price Injectors, and conversion-optimized Card Hierarchies with tier-aware visual differentiation.
 - **Atmospheric Depth:** Skilled in applying OLED Navy glows (`shadow-[0_0_60px_rgba(0,0,128,0.4)]`) and `backdrop-blur-2xl` to ensure pricing cards "float" within the dark cosmic void — creating a premium sense of depth without borders.
+
+## 4. The "Vondera Cinematic Authority" Pattern (For About/Team Sections)
+
+- **The Stage Spotlight:** Use a strict top-center radial gradient to simulate theater lighting. `bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white/10 via-[#050505] to-[#050505]`.
+- **Mega-Typography:** Unapologetically massive. Headings must range from `text-5xl` to `text-8xl` on desktop. `font-black`, extremely tight tracking (`tracking-tighter`), and leading (`leading-none` or `leading-[1.1]`).
+- **The Hook:** The final sentence of the hero story MUST break the white text pattern and use an electric gradient (e.g., `from-blue-500 to-emerald-400`) to anchor the eye.
+- **Cinematic Team Portraits:** Image wrappers MUST enforce `filter grayscale transition-all duration-500 hover:grayscale-0`. The info container beneath the photo must be a distinct Dark Slate (`bg-[#0a0a0a]`) with stark white text and a subtle colored bottom border (e.g., `border-b-2 border-blue-600`).
+
+## 5. Mega Menu & Products Hub Aesthetics
+
+- **The Glassmorphic Curtain:** The Mega Menu dropdown MUST use `bg-[#050505]/70 backdrop-blur-3xl border border-white/5`. It should span a significant width of the screen to accommodate multiple columns (Themes, Domains as primaries + Pay, Ship, Quantus AI as features).
+- **Search Engine UI (Domains Page):** The Domains page hero must feature a massive, centrally aligned search bar (`h-20 text-2xl`). Focus states must utilize neon rings (`focus:ring-2 focus:ring-blue-500/50`) without compromising OLED Black backgrounds.
+- **Theme Matrix Architecture:** The Themes page must display the 10 exclusive Matgarco themes in a cinematic mockup gallery. Hovering over a theme should trigger a sophisticated "Quick View" micro-interaction.

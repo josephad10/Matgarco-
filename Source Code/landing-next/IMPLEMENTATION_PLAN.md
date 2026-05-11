@@ -140,3 +140,33 @@ Deploy a world-class, side-aligned B2B2C SaaS Landing Page mirroring Shopify/Von
   2. **Tier Cards:** Navy/Gold depth glows; Pro card receives `scale(1.05)` + `shadow-[0_0_60px_rgba(59,130,246,0.4)]`.
   3. **Comparison Matrix:** Sticky column headers, CSS Grid (zero JS layout calculations), CLS target < 0.1.
   4. **Glocal Strategy:** EN displays USD equivalents, AR displays EGP. Driven strictly by `t.pricingPage.*` dictionary — never hardcoded.
+
+## PHASE 14-23: The About & Resources Mega-Page (Vondera-Grade)
+
+- [ ] **Phase 14: Dictionary Setup:** Inject full i18n copy for Story, Vision, Values, Team, and Resources into `ar.ts` and `en.ts`.
+- [ ] **Phase 15: Our Story (Vondera Hero):** Build the OLED Black hero section. Top-center radial spotlight, massive leading typography (`text-6xl` to `text-8xl`), and the neon brand-colored hook text ("From Same People to Same People").
+- [ ] **Phase 16: Vision & Mission:** Implement asymmetrical or split-card layout for Vision and Mission. Maintain dark mode continuity.
+- [ ] **Phase 17: Our Values:** Build a 4-column minimal grid (Transparency, Innovation, Support, Growth) with subtle hover glows.
+- [ ] **Phase 18: Meet Our Team (Cinematic):** Build the Vondera-style founder cards. Default `grayscale` filter transitioning to color on hover. Dark slate info-boxes with LinkedIn icons.
+- [ ] **Phase 19: Resources Bridge:** Create the transitional section title bridging the "Team" narrative into the "Help & Tools" utility.
+- [ ] **Phase 20: Explore Our Resources:** Implement a 6-grid Bento layout (Help Center, Video Tutorials, Developer Docs, Blog, Community, FAQ). Use the "Embedded Light Canvas" technique for high contrast.
+- [ ] **Phase 21: Most Popular Guides:** Build an indexed, numbered list (`01`, `02`, `03`) for immediate quick-start articles.
+- [ ] **Phase 22: Support CTA:** Add the final robust contact box offering "Contact via Email" and "Live Chat" buttons.
+- [ ] **Phase 23: Orchestration:** Assemble all components sequentially in `src/app/about/page.tsx`.
+
+## Note: Navbar.tsx will be refactored to host the <ProductsMegaMenu /> Client Component.
+
+#### 4. تحديث ملف `IMPLEMENTATION_PLAN.md`
+
+_(قم بإضافة الـ Phases الجديدة من 24 إلى 29 في قائمة المهام `## 📋 EXECUTION ROADMAP`)_
+
+```markdown
+### 🛒 TIER 5: THE PRODUCTS MEGA-HUB & OS ECOSYSTEM
+
+- [ ] **Phase 24: Dictionary Injection (The Products):** Inject the precise English and Arabic text for Quantus AI, Matgarco Ship, Matgarco Pay, Themes, and Domains into `en.ts` and `ar.ts`.
+- [ ] **Phase 25: The Glass Curtain (Mega Menu):** Refactor `Navbar.tsx` to include the `ProductsMegaMenu.tsx`. Implement Framer Motion `AnimatePresence`, spring physics, and the multi-column layout (Themes/Domains + Features).
+- [ ] **Phase 26: Quantus AI USP Showcase:** Build the dedicated visual section for "Matgarco Quantus AI" highlighting Conversational Commerce, Vision-to-Storefront API, and Zero-Hallucination JSON Bridging.
+- [ ] **Phase 27: Domains Search Engine Experience:** Build `/products/domains`. Implement the massive central search bar, Free SSL/DNS features, and the "Popular Domain Extensions" grid.
+- [ ] **Phase 28: Theme Matrix Gallery:** Build `/products/themes`. Create the layout to showcase the 10 exclusive Matgarco themes, including their prices, features, and a sleek hover/preview mechanism.
+- [ ] **Phase 29: Ecosystem Pillars (Pay & Ship):** Build visual representations (either standalone pages or deep sections) for Matgarco Pay (InstaPay, Paymob) and Matgarco Ship (Bosta, Aramex, Automated Tracking).
+```

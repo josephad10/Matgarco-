@@ -1,0 +1,147 @@
+6.4 Source Code Architecture and Organization
+6.4.1 Architectural Overview The Matgarco source code repository is architected in strict adherence to enterprise-level software engineering paradigms. The codebase enforces a rigorous Separation of Concerns (SoC) and modularity, ensuring long-term maintainability, horizontal scalability, and seamless collaboration across development teams.
+
+6.4.2 Backend Core Architecture (backend-node/src) The Node.js infrastructure utilizes a Modular Monolithic architecture. The directory structure is meticulously organized to isolate routing, business logic, and data access layers.
+
+backend-node/src/
+├── 📁 models/                         [Data Access Layer: 15 MongoDB Models]
+│   ├── User.ts                        → Core user identity and RBAC schema
+│   ├── Merchant.ts                    → Tenant (Business Owner) entity schema
+│   ├── Product.ts                     → Catalog and inventory data schema
+│   ├── Order.ts                       → Transactional and fulfillment schema
+│   ├── Customer.ts                    → End-consumer CRM profile schema
+│   ├── Discount.ts                    → Promotional logic and coupon schema
+│   ├── Subscription.ts                → SaaS billing and subscription records
+│   ├── Plan.ts                        → SaaS pricing tiers definition schema
+│   ├── MerchantPayout.ts              → Bank transfer and payout ledgers
+│   ├── Notification.ts                → Systemic alerts and history schema
+│   ├── Theme.ts                       → Global UI storefront templates
+│   ├── StoreTheme.ts                  → Tenant-specific UI customizations
+│   ├── Announcement.ts                → Platform-wide administrative broadcasts
+│   ├── Ticket.ts                      → Merchant support helpdesk schema
+│   └── PlatformSettings.ts            → Global administrative configuration
+│
+├── 📁 controllers/                    [Request Handling Layer: 20 Controllers]
+│   ├── authController.ts              → Orchestrates authentication workflows
+│   ├── productController.ts           → Manages catalog CRUD operations
+│   ├── orderController.ts             → Manages fulfillment state machines
+│   ├── customerController.ts          → Orchestrates CRM interactions
+│   ├── merchantController.ts          → Manages tenant profile operations
+│   ├── discountController.ts          → Validates and applies promotional logic
+│   ├── subscriptionController.ts      → Manages SaaS tier upgrades/downgrades
+│   ├── paymentController.ts           → Processes financial transactions
+│   ├── themeController.ts             → Handles UI state modifications
+│   ├── notificationController.ts      → Dispatches real-time alerts
+│   ├── staffController.ts             → Manages tenant sub-account operations
+│   ├── reportController.ts            → Aggregates analytics and data exports
+│   └── ...                            → (Additional specialized controllers)
+│
+├── 📁 routes/                         [API Endpoints Mapping: 20 Route Files]
+│   ├── auth.routes.ts                 → /api/auth (Registration & Login)
+│   ├── product.routes.ts              → /api/products (Catalog endpoints)
+│   ├── order.routes.ts                → /api/orders (Checkout & Fulfillment)
+│   ├── customer.routes.ts             → /api/customers (CRM endpoints)
+│   ├── merchant.routes.ts             → /api/merchants (Tenant settings)
+│   ├── discount.routes.ts             → /api/discounts (Coupon validations)
+│   ├── subscription.routes.ts         → /api/subscriptions (Billing endpoints)
+│   ├── theme.routes.ts                → /api/themes (Storefront UI endpoints)
+│   ├── payment.routes.ts              → /api/payments (Gateway webhooks)
+│   ├── payout.routes.ts               → /api/payouts (Withdrawal endpoints)
+│   ├── staff.routes.ts                → /api/staff (RBAC assignments)
+│   ├── search.routes.ts               → /api/search (Advanced querying)
+│   ├── upload.routes.ts               → /api/upload (Media orchestration)
+│   ├── oauth.routes.ts                → /api/oauth (Google/Apple SSO)
+│   └── ...                            → (Additional systemic routes)
+│
+├── 📁 services/                       [Business Logic Layer]
+│   ├── authService.ts                 → Cryptographic hashing and validation
+│   ├── jwtService.ts                  → Stateless token generation and parsing
+│   ├── paymentService.ts              → Paymob API wrapper and integration
+│   ├── notificationService.ts         → SMTP and systemic event dispatching
+│   ├── uploadService.ts               → Cloudinary CDN media optimization
+│   ├── subscriptionService.ts         → Tier validation and limit enforcement
+│   └── analyticsService.ts            → Complex aggregation pipelines
+│
+├── 📁 middleware/                     [Request Interception & Security]
+│   ├── auth.middleware.ts             → JWT validation & Permission gates
+│   ├── tenantIsolation.middleware.ts  → Cryptographic multi-tenant data scoping
+│   ├── validation.middleware.ts       → Zod schema interception and parsing
+│   ├── errorHandler.middleware.ts     → Global systemic exception handling
+│   ├── upload.middleware.ts           → Multipart/form-data sanitization
+│   └── rateLimit.middleware.ts        → DDoS and brute-force mitigation
+│
+├── 📁 config/                         [System Configuration]
+│   ├── database.ts                    → MongoDB connection orchestration
+│   ├── passport.ts                    → OAuth 2.0 strategy definitions
+│   ├── cloudinary.ts                  → CDN environment configurations
+│   ├── paymob.ts                      → Payment gateway credential mapping
+│   └── environment.ts                 → Centralized ENV variable validation
+│
+├── 📁 utils/                          [Shared Helpers & Tools]
+│   ├── validators.ts                  → Reusable regex and validation functions
+│   ├── helpers.ts                     → Generic computational algorithms
+│   ├── constants.ts                   → Immutable platform-wide constants
+│   ├── errors.ts                      → Custom HTTP Error extending classes
+│   └── transformers.ts                → DTO (Data Transfer Object) formatters
+│
+├── 📁 types/                          [TypeScript Definitions]
+│   ├── User.types.ts                  → User type interfaces
+│   ├── Product.types.ts               → Catalog type interfaces
+│   ├── Order.types.ts                 → Transaction type interfaces
+│   └── API.types.ts                   → Standardized API response contracts
+│
+├── 📁 scripts/                        [Automation & Database Seeding]
+│   ├── seedDemo.ts                    → Populates baseline architectural data
+│   ├── seedFullDemo.ts                → Injects comprehensive mock test data
+│   └── migrations.ts                  → Database schema evolution scripts
+│
+├── app.ts                             → Express.js application bootstrap
+└── server.ts                          → HTTP server initialization and listener
+
+
+6.4.3 AI Microservices Architecture (ai-python/) The Python-based generative AI microservices follow a lightweight, highly decoupled router-service architecture built on the FastAPI framework.
+
+ai-python/
+├── 📁 routes/                         [FastAPI Endpoint Routers: 7 Files]
+│   ├── ai_routes.py                   → Global AI request orchestration
+│   ├── description_routes.py          → Generative product descriptions
+│   ├── seo_routes.py                  → Metadata and SEO tag synthesis
+│   ├── translation_routes.py          → Multi-language NLP engines
+│   ├── chat_routes.py                 → Conversational AI interfaces
+│   ├── assistant_routes.py            → Specialized merchant prompt handling
+│   └── analytics_routes.py            → Predictive data and insight generation
+│
+├── 📁 services/                       [LLM Integration Layer]
+│   └── qwen_client.py                 → DashScope (Qwen AI) API orchestration
+│
+├── config.py                          → Environment and API key configurations
+└── main.py                            → FastAPI application bootstrap
+
+
+6.4.4 Applied Software Design Patterns To resolve complex architectural challenges, the codebase strictly implements the following enterprise-grade patterns:
+
+MVC (Model-View-Controller): Enforces a rigid separation between data schema mapping, business logic, and API endpoint delivery.
+Service Layer Pattern: Decouples core business logic from controllers, ensuring functional reusability across different execution contexts.
+Repository Pattern: Abstracts database queries, ensuring the service layer remains highly scalable and agnostic to the underlying MongoDB ORM.
+Middleware Pattern: Intercepts HTTP requests to resolve cross-cutting concerns (e.g., authentication, tenant isolation, validation) prior to controller execution.
+Dependency Injection (DI): Utilized implicitly across service classes to enhance system modularity and unit testability.
+Centralized Error Handling: A unified architectural pattern for capturing, formatting, and dispatching systemic exceptions securely.
+
+6.4.5 Code Quality and Security Standards The repository strictly enforces continuous quality assurance constraints:
+
+TypeScript Strict Mode: Enforces absolute type safety, eliminating implicit any types and reducing runtime reference exceptions.
+ESLint & Prettier: Automated static code analysis and syntax formatting to guarantee semantic consistency across the codebase.
+Comprehensive Error Handling: Prevents stack trace leakages and standardizes HTTP response structures (400, 401, 403, 404, 500).
+Input Validation: Mandatory payload sanitization executing via Zod prior to database injection.
+Security Best Practices: Systematic mitigation against OWASP vulnerabilities, including NoSQL Injection, XSS, and CSRF attacks.
+
+6.4.6 Internal Documentation Standards
+
+JSDoc Annotations: Standardized block tags explaining function intents, parameters, and return types across the codebase.
+Directory-Level READMEs: Localized markdown files detailing the specific architectural intent of individual directories.
+Type Definitions: Explicit TypeScript interfaces and aliases defining exact data contracts for inter-module communication.
+Inline Logic Comments: Contextual algorithmic explanations embedded exclusively within complex computational blocks.
+
+API Specification: Exhaustive documentation mapping RESTful endpoint behaviors and expected HTTP status codes.
+Changelog Tracking: Maintained via CHANGELOG.md for semantic versioning and modification history logging.
+

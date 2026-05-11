@@ -85,3 +85,53 @@ src/
 > - `PricingToggle.tsx` → Writes `billingCycle: "monthly" | "annual"` to Zustand. Never emits prices directly.
 > - `PricingCards.tsx` → Reads `billingCycle` from Zustand. Never holds billing state internally (SRP).
 > - `ComparisonMatrix.tsx` → Pure presentational RSC-compatible component. Receives static feature data as props.
+
+### 5. `/about` (The Company & Knowledge Mega-Hub)
+
+**Purpose:** Establish deep merchant trust through a Vondera-style cinematic founding story, transparent team showcase, and a seamless vertical transition into empowering educational resources.
+**Aesthetic:** "Vondera Cinematic Authority" (OLED Black, Top Spotlights, Massive Typography, Greyscale Portraits).
+
+**Directory Structure (Mega-Page Architecture):**
+
+```text
+src/
+└── app/
+    └── about/
+        ├── page.tsx                       (RSC: Mega-Page Assembler)
+        └── components/
+            ├── AboutStoryHero.tsx         (Phase 15: Vondera Spotlight & Massive Text)
+            ├── VisionMission.tsx          (Phase 16: High-contrast strategic goals)
+            ├── CompanyValues.tsx          (Phase 17: 4-Grid utility layout)
+            ├── MeetTheTeam.tsx            (Phase 18: Cinematic Greyscale Cards)
+            ├── ResourcesBridge.tsx        (Phase 19: Visual transition header)
+            ├── ExploreResources.tsx       (Phase 20: 6-Grid Bento for knowledge base)
+            ├── PopularGuides.tsx          (Phase 21: Indexed quick-start list)
+            └── SupportCTA.tsx             (Phase 22: Email & Live Chat action box)
+```
+
+### 6. `/products` (The E-commerce OS Hub)
+
+**Purpose:** Shift from generic "Solutions" to concrete "Products". The Navbar will feature a Glassmorphic Mega Menu that acts as the command center for these offerings.
+**Aesthetic:** High-tech Showcase, Massive Search Bars, Cinematic Theme Galleries.
+
+**Directory Structure (Products Architecture):**
+
+```text
+src/
+└── app/
+    └── products/
+        ├── layout.tsx                     (RSC: Shared background/wrapper for products)
+        ├── themes/
+        │   ├── page.tsx                   (Phase 27: Theme Gallery Matrix - The 10 Matgarco Themes)
+        │   └── components/
+        │       ├── ThemeCard.tsx          (Client: Hover states & Preview Modal triggers)
+        │       └── ThemeFilter.tsx        (Client: Category filtering)
+        ├── domains/
+        │   ├── page.tsx                   (Phase 28: The Search Engine Experience)
+        │   └── components/
+        │       ├── DomainSearchBar.tsx    (Client: Massive input with instant validation simulation)
+        │       └── PopularExtensions.tsx  (RSC: Grid of .com, .net, .store features)
+        ├── quantus/                       (Phase 29: Quantus AI USP Showcase)
+        ├── pay/                           (Phase 30: Local Payments - Fawry, InstaPay, Paymob)
+        └── ship/                          (Phase 30: Logistics - Bosta, Aramex)
+```

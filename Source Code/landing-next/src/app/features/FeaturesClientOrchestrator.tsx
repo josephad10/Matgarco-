@@ -6,6 +6,7 @@ import { InteractiveBento } from "@/components/features-islands/InteractiveBento
 import { WorkspaceShowcase } from "@/components/features-islands/WorkspaceShowcase";
 import { SectorShowcase } from "@/components/features-islands/SectorShowcase";
 import { ShippingIsland } from "@/components/features/ShippingIsland";
+import { PaymentIsland } from "@/components/features/PaymentIsland";
 
 /**
  * FeaturesClientOrchestrator
@@ -31,6 +32,9 @@ export function FeaturesClientOrchestrator() {
 
       {/* 7. LUXURY SHIPPING SECTION (PHASE 13) */}
       <ShippingIsland />
+
+      {/* 8. LOCAL PAYMENTS ISLAND (PHASE 13.5) */}
+      <PaymentIsland />
     </>
   );
 }
