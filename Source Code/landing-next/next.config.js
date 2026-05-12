@@ -4,15 +4,17 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'res.cloudinary.com',
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        pathname: "/**", // التصريح الشامل لصور Cloudinary
       },
       {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**", // حافظنا على صور Unsplash عشان تصميمك ميبظش
       },
     ],
   },
-}
+};
 
 module.exports = nextConfig;

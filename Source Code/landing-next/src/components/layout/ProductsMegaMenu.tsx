@@ -129,7 +129,7 @@ export const ProductsMegaMenu: React.FC<ProductsMegaMenuProps> = ({
                             "w-5 h-5 transition-transform duration-300",
                             isRtl
                               ? "group-hover:-translate-x-1"
-                              : "group-hover:translate-x-1"
+                              : "group-hover:translate-x-1",
                           )}
                         />
                       </div>
@@ -175,7 +175,7 @@ const MenuLink: React.FC<MenuLinkProps> = ({
             "w-16 h-16 rounded-[1.5rem] flex items-center justify-center shadow-sm border bg-gradient-to-br group-hover:scale-110 transition-transform duration-500 shrink-0",
             gradient,
             border,
-            color
+            color,
           )}
         >
           {icon}
