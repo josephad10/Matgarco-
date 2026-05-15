@@ -1,7 +1,15 @@
 "use client";
 
 import { useLanguage } from "@/i18n/LanguageContext";
-import { Facebook, Twitter, Instagram, Linkedin, Shield, Send, MessageCircle } from "lucide-react";
+import {
+  Facebook,
+  Twitter,
+  Instagram,
+  Linkedin,
+  Shield,
+  Send,
+  MessageCircle,
+} from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
@@ -26,23 +34,24 @@ export function GlobalFooter() {
   ];
 
   return (
-    <footer dir={isRtl ? "rtl" : "ltr"} className="relative overflow-hidden bg-[#000000] pt-20 pb-8 text-white">
+    <footer
+      dir={isRtl ? "rtl" : "ltr"}
+      className="relative overflow-hidden bg-[#000000] pt-20 pb-8 text-white"
+    >
       {/* Top Gradient Border */}
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/40 to-transparent z-10"></div>
-      
+
       {/* Navy Nebula Glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] max-w-[1000px] h-[300px] bg-blue-600/15 blur-[120px] rounded-full pointer-events-none z-0"></div>
 
       <div className="max-w-7xl mx-auto px-4 relative z-10">
-        
         {/* Main Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-6 gap-12">
-          
           {/* Brand Area */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2">
               <Image
-                src="/logo.svg"
+                src="/logo.png"
                 alt="Matgarco"
                 width={195}
                 height={48}
@@ -50,15 +59,15 @@ export function GlobalFooter() {
               />
               <sup className="text-[10px] text-gray-500 font-bold -mt-4">®</sup>
             </div>
-            
+
             <p className="mt-8 text-sm text-gray-400 leading-relaxed max-w-sm">
               {t.footer?.description}
             </p>
 
             <div className="flex items-center gap-5 mt-10">
               {socialLinks.map(({ Icon, href }, idx) => (
-                <span 
-                  key={idx} 
+                <span
+                  key={idx}
                   className="text-gray-400 hover:text-white hover:scale-110 hover:shadow-[0_0_20px_rgba(59,130,246,0.6)] transition-all duration-300 cursor-pointer"
                 >
                   <Icon size={20} />
@@ -75,19 +84,22 @@ export function GlobalFooter() {
               </h3>
               <div className="flex flex-col gap-4">
                 {column.links.map((link: string, linkIdx: number) => {
-                  const isSoon = link === "Mobile App" || 
-                                 link === "تطبيق الجوال" || 
-                                 link === "Developer API" || 
-                                 link === "واجهة المطورين";
+                  const isSoon =
+                    link === "Mobile App" ||
+                    link === "تطبيق الجوال" ||
+                    link === "Developer API" ||
+                    link === "واجهة المطورين";
 
                   return (
-                    <span 
-                      key={linkIdx} 
+                    <span
+                      key={linkIdx}
                       className="block text-[13px] text-gray-400 hover:text-white hover:translate-x-1 rtl:hover:-translate-x-1 transition-all duration-200 cursor-pointer mb-1 w-fit"
                     >
                       {link}
                       {isSoon && (
-                        <span className={`${isRtl ? "mr-2" : "ml-2"} px-2 py-0.5 text-[9px] bg-blue-900/40 text-blue-400 border border-blue-500/30 rounded-full font-bold uppercase tracking-tighter`}>
+                        <span
+                          className={`${isRtl ? "mr-2" : "ml-2"} px-2 py-0.5 text-[9px] bg-blue-900/40 text-blue-400 border border-blue-500/30 rounded-full font-bold uppercase tracking-tighter`}
+                        >
                           Soon
                         </span>
                       )}
@@ -101,29 +113,29 @@ export function GlobalFooter() {
 
         {/* Bottom Bar */}
         <div className="mt-20 pt-10 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 text-[11px] text-gray-500 font-medium tracking-wide">
-          
           <div className="flex items-center">
             {t.footer?.bottomBar?.copyright}
           </div>
 
           <div className="flex items-center gap-4">
-            {t.footer?.bottomBar?.policyLinks?.map((link: string, idx: number) => (
-              <React.Fragment key={idx}>
-                <span className="hover:text-white cursor-pointer transition-colors">
-                  {link}
-                </span>
-                {idx < t.footer.bottomBar.policyLinks.length - 1 && (
-                  <span className="text-gray-700">•</span>
-                )}
-              </React.Fragment>
-            ))}
+            {t.footer?.bottomBar?.policyLinks?.map(
+              (link: string, idx: number) => (
+                <React.Fragment key={idx}>
+                  <span className="hover:text-white cursor-pointer transition-colors">
+                    {link}
+                  </span>
+                  {idx < t.footer.bottomBar.policyLinks.length - 1 && (
+                    <span className="text-gray-700">•</span>
+                  )}
+                </React.Fragment>
+              ),
+            )}
           </div>
 
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-gray-400">
             <Shield className="w-3.5 h-3.5 text-blue-500" />
             <span>{t.footer?.bottomBar?.secured}</span>
           </div>
-
         </div>
       </div>
     </footer>

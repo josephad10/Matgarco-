@@ -37,7 +37,7 @@ export function Navbar() {
           className="flex items-center gap-2 relative z-50 shrink-0 outline-none"
         >
           <Image
-            src="/logo.svg"
+            src="/logo.png"
             alt="Matgarco"
             width={195}
             height={48}

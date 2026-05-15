@@ -92,3 +92,9 @@ The Hero section is inspired by Vondera/Shopify.
 - **The Glassmorphic Curtain:** The Mega Menu dropdown MUST use `bg-[#050505]/70 backdrop-blur-3xl border border-white/5`. It should span a significant width of the screen to accommodate multiple columns (Themes, Domains as primaries + Pay, Ship, Quantus AI as features).
 - **Search Engine UI (Domains Page):** The Domains page hero must feature a massive, centrally aligned search bar (`h-20 text-2xl`). Focus states must utilize neon rings (`focus:ring-2 focus:ring-blue-500/50`) without compromising OLED Black backgrounds.
 - **Theme Matrix Architecture:** The Themes page must display the 10 exclusive Matgarco themes in a cinematic mockup gallery. Hovering over a theme should trigger a sophisticated "Quick View" micro-interaction.
+
+- **Domain Engine Interaction States:**
+  - **The Idle State:** Massive search bar with dark slate background (`bg-[#0a0a0a]`), white border at `10% opacity`.
+  - **The Focus State (Typing):** Must trigger a neon glow effect (`focus:ring-4 focus:ring-[#000080]/50`) to signify active listening.
+  - **The Success State (Available):** Clean, minimalist success text using a soft, authoritative green (e.g., `text-emerald-400 font-bold`).
+  - **The Taken State (Unavailable):** Soft error indication (`text-rose-500`) followed immediately by white, clickable suggestion pills (`bg-white/10 hover:bg-white text-white hover:text-black transition-all`).

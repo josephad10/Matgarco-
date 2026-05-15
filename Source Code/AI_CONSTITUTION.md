@@ -110,3 +110,10 @@ Confirm that you have read, internalized, and successfully overwritten `AI_CONST
 - **The Glass Curtain (Mega Menu):** All complex dropdowns MUST utilize Framer Motion's `<AnimatePresence>`. The curtain must enter and exit using highly polished `spring` physics (`damping: 20, stiffness: 100`) without causing layout thrashing.
 - **The USP Core (Quantus AI):** Matgarco's "Quantus AI" is not just a feature; it is the Autonomous eCommerce Architect. All UI components presenting Quantus AI must reflect advanced neural capabilities (Vision-to-Storefront API, Zero-Hallucination JSON).
 - **Product Pillars Integration:** Themes and Domains are the primary entry points (MVP Core). Matgarco Pay (InstaPay, Paymob) and Matgarco Ship (Bosta, Aramex) must be visually treated as deeply integrated infrastructure, not third-party plugins.
+
+## ⚙️ Pillar 5: Search Engines & Live Availability Rules
+
+- **Debouncing is Mandatory:** Any client-side input that queries the backend for availability MUST implement a debounce mechanism (minimum 500ms) to prevent DDoS-like API spamming.
+- **Reserved Words (Blacklist):** Domain/Subdomain availability checks MUST first run against a hardcoded system blacklist (e.g., `admin`, `api`, `matgarco`, `checkout`) before hitting the database.
+- **Smart Failures:** An unavailable result is NOT an error; it is an opportunity. The API must never return just `{ available: false }`. It MUST return `{ available: false, suggestions: [...] }` by applying lexical permutations.
+- **Indexing:** All queried fields (like `subdomain`) MUST be indexed at the database level (`index: true`) to ensure `O(1)` or `O(log n)` read times.

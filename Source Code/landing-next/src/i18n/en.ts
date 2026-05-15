@@ -13,7 +13,8 @@ export const en: Translations = {
     limitedTitle: "Limited Editions",
     limitedSubtitle: "Exclusive themes available as a one-time purchase",
     comingSoonTitle: "More themes coming soon...",
-    comingSoonDesc: "Our designers are currently building new exclusive themes. The current 27 templates are just the beginning of a continuously growing library to fit every business need.",
+    comingSoonDesc:
+      "Our designers are currently building new exclusive themes. The current 27 templates are just the beginning of a continuously growing library to fit every business need.",
     perksTitle: "What every theme gets you",
     perk1Title: "Built for commerce",
     perk1Desc: "fast, reliable, and with the world's best-converting checkout",
@@ -21,6 +22,144 @@ export const en: Translations = {
     perk2Desc: "product recommendations, reviews, discounts, and much more",
     perk3Title: "Developer support",
     perk3Desc: "get help when you need it, including free updates",
+  },
+
+  // Domains Page
+  mdomainPage: {
+    heroTitle: "Set up shop with the perfect domain",
+    heroSubtitle:
+      "Register, host, and manage it from the same place you do business.",
+    searchPlaceholder: "Search domains (e.g. yourstore.com)",
+    searchButton: "Search domains",
+    exactMatchLabel: "Top Pick",
+    unavailable: "Unavailable",
+    getDomainBtn: "Get domain",
+    suggestionsTitle: "Included with Matgarco domains",
+    buyBtn: "Buy",
+    popularExtensions: "Popular Extensions",
+    extensionPromoTitle: "Stand out with the right domain extension",
+    extensionPromoDesc: "Pick from hundreds of TLDs to target a specific audience, establish a niche, or expand into global markets with a local flare.",
+    popularExtensionsDesc: "Choose from a variety of domain extensions at great prices",
+    extensionsList: [
+      { ext: ".com", price: "599 EGP/year", badge: "Popular", badgeType: "popular" },
+      { ext: ".net", price: "699 EGP/year" },
+      { ext: ".shop", price: "599 EGP/year", badge: "Sale!", badgeType: "sale" },
+      { ext: ".store", price: "799 EGP/year" },
+      { ext: ".online", price: "599 EGP/year", badge: "Sale!", badgeType: "sale" },
+      { ext: ".site", price: "499 EGP/year", badge: "Sale!", badgeType: "sale" }
+    ],
+    shopifyTierPromo: {
+      title: "Name it, claim it, manage it. All in one place.",
+      features: [
+        { title: "Settings and controls", desc: "Configure DNS, CNAME, and A Records from your Matgarco admin." },
+        { title: "Redirects", desc: "Set up URL redirects to consolidate links and improve SEO." },
+        { title: "Connections", desc: "Point your third-party domain to your Matgarco store in a few clicks." },
+        { title: "Transfers", desc: "Migrate third-party domains to manage everything within Matgarco." },
+        { title: "Renewals", desc: "Keep your domain active with automatic, hassle-free renewals." },
+        { title: "Email forwarding", desc: "Easily set up custom domain email forwarding addresses." }
+      ]
+    },
+    domainManagementSection: {
+      title: "Rest easy with a secure domain",
+      features: [
+        { desc: "Free, automatic SSL certificate. No encryption purchase needed." },
+        { desc: "WHOIS Privacy protection. Included with eligible extensions." },
+        { desc: "24/7 support. Chat, call, read guides, or watch videos." }
+      ]
+    },
+    easyPayment: {
+      paragraph: "We understand the challenges of international payments. That's why we made it simple—pay for your domain using Egyptian Pounds through local payment methods you already use.",
+      benefits: {
+        payInEGP: "Pay in Egyptian Pounds",
+        noCreditCard: "No Credit Card Required",
+        bankTransfers: "Bank Transfers",
+        mobileWallets: "Mobile Wallets",
+        transparentPricing: "Transparent Pricing",
+        securePayment: "Secure Payment"
+      }
+    },
+    paymentMethods: {
+      title: "Payment Methods",
+      egp: {
+        title: "EGP",
+        subtitle: "mdomainPage"
+      },
+      bankTransfer: "Bank Transfer",
+      mobileWallets: "Mobile Wallets",
+      debitCards: "Debit Cards",
+      footerNote: "Prices are converted to EGP at the daily exchange rate."
+    },
+    stepsSection: {
+      title: "Get Started in 3 Simple Steps",
+      subtitle: "Register your domain in minutes",
+      steps: [
+        {
+          title: "Search Your Domain",
+          desc: "Enter your desired domain name and find available options instantly."
+        },
+        {
+          title: "Choose Payment Method",
+          desc: "Select your preferred local payment option—bank transfer or mobile wallet."
+        },
+        {
+          title: "Start Building",
+          desc: "Your domain is ready! Connect it to your Matgarco store and go live."
+        }
+      ]
+    },
+    faqSection: {
+      title: "Frequently asked questions",
+      items: [
+        {
+          q: "What is a domain and why should I buy one?",
+          a: "A domain, or domain name, is essentially a web URL or address. Simply put, your domain is the digital equivalent of a store's physical address, and is how your customers find and access your online business. A custom domain helps your brand look professional and builds trust."
+        },
+        {
+          q: "What is a subdomain?",
+          a: "If a domain name is the face of your virtual storefront, think of a subdomain as another door. It is an optional part of a domain name that appears as a prefix, placed before the root domain (such as shop.yourwebsite.com). You can easily connect and manage subdomains directly from your Matgarco admin."
+        },
+        {
+          q: "How does buying a domain through Matgarco work?",
+          a: "It's simple: Search for a name, choose an extension, and purchase it. Every domain is registered in your name and set up automatically to point to your store. SSL is issued automatically, and DNS is preconfigured. No technical headaches."
+        },
+        {
+          q: "How much does a domain cost?",
+          a: "Domain prices vary by extension (TLD) like .com or .store. With Matgarco, there are no hidden fees. The price includes domain registration, automatic renewal, and free WHOIS privacy protection to safeguard your personal information."
+        },
+        {
+          q: "Do I need to purchase hosting?",
+          a: "No! You do not need to purchase separate web hosting when you use Matgarco. All Matgarco plans come with secure, fast web hosting with unlimited bandwidth included for free."
+        }
+      ]
+    },
+    transferMarquee: {
+      text: "Elevate your brand with Matgarco. Transfer your existing domain effortlessly and enjoy zero downtime. Secure your digital identity today.",
+      button: "Transfer Domain"
+    },
+
+    featuresTitle: "Everything you need, included for free",
+    features: [
+      {
+        title: "Free SSL Certificate",
+        desc: "Bank-grade 256-bit encryption included free forever to protect your customers and boost your SEO.",
+      },
+      {
+        title: "Instant DNS Setup",
+        desc: "No technical headaches. Buy your domain and our automated systems will map it to your store instantly.",
+      },
+      {
+        title: "WHOIS Privacy",
+        desc: "We mask your personal contact information from public databases to protect you from spam.",
+      },
+      {
+        title: "Auto-Renewal",
+        desc: "Never lose your brand name. Set it, forget it, and let our secure billing handle the rest.",
+      },
+    ],
+    ctaTitle: "Already have a domain?",
+    ctaDesc:
+      "Bring your existing domain to Matgarco. Our seamless transfer process ensures zero downtime for your store.",
+    ctaButton: "Transfer Domain",
   },
 
   // Navbar

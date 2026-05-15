@@ -166,7 +166,14 @@ _(قم بإضافة الـ Phases الجديدة من 24 إلى 29 في قائم
 - [ ] **Phase 24: Dictionary Injection (The Products):** Inject the precise English and Arabic text for Quantus AI, Matgarco Ship, Matgarco Pay, Themes, and Domains into `en.ts` and `ar.ts`.
 - [ ] **Phase 25: The Glass Curtain (Mega Menu):** Refactor `Navbar.tsx` to include the `ProductsMegaMenu.tsx`. Implement Framer Motion `AnimatePresence`, spring physics, and the multi-column layout (Themes/Domains + Features).
 - [ ] **Phase 26: Quantus AI USP Showcase:** Build the dedicated visual section for "Matgarco Quantus AI" highlighting Conversational Commerce, Vision-to-Storefront API, and Zero-Hallucination JSON Bridging.
-- [ ] **Phase 27: Domains Search Engine Experience:** Build `/products/domains`. Implement the massive central search bar, Free SSL/DNS features, and the "Popular Domain Extensions" grid.
+- [ ] **Phase 27: Domains Search Engine Experience (The 7-Step Masterplan):**
+  - [ ] **Phase 27.1: The Massive Search Hero (UI):** Build the initial UI in `/products/domains`. Massive central input (`h-24`), strict Dark Mode (`#050505`), neon focus rings, and Shopify-grade typography.
+  - [ ] **Phase 27.2: Database & Architecture Prep (Backend):** Ensure `subdomain` and `customDomain` fields in the `Merchant` schema have `unique: true` and `index: true`. Create a Blacklist array (e.g., admin, support, matgarco).
+  - [ ] **Phase 27.3: The Availability & Suggestion Engine (API):** Build the endpoint `/api/v1/domains/check`. Implement the logic to query the DB. If taken, generate smart alternatives using prefixes/suffixes (shop, store, get) and validate their availability.
+  - [ ] **Phase 27.4: Frontend Integration & Debouncing (Client):** Connect the Search Hero to the API using Axios. Implement a 500ms Debounce to protect the server. Add skeleton/spinner loading states (The "Thinking" phase).
+  - [ ] **Phase 27.5: The Results Matrix (UI):** Build the conditional rendering UI. If available -> Success State (Green). If taken -> Error State (Red) + Render the dynamic suggestions array as clickable pills.
+  - [ ] **Phase 27.6: TLDs Pricing Grid (UI):** Display the grid of popular extensions (.com, .net, .store, .eg) with their respective annual pricing, exactly mimicking the Shopify layout.
+  - [ ] **Phase 27.7: Infrastructure Perks & Transfer CTA (UI):** Build the "Why get a domain from Matgarco" section highlighting Free SSL, Instant DNS mapping, and WHOIS privacy, ending with a Domain Transfer CTA.
 - [ ] **Phase 28: Theme Matrix Gallery:** Build `/products/themes`. Create the layout to showcase the 10 exclusive Matgarco themes, including their prices, features, and a sleek hover/preview mechanism.
 - [ ] **Phase 29: Ecosystem Pillars (Pay & Ship):** Build visual representations (either standalone pages or deep sections) for Matgarco Pay (InstaPay, Paymob) and Matgarco Ship (Bosta, Aramex, Automated Tracking).
 ```

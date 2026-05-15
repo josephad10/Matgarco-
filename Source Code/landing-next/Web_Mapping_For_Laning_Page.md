@@ -135,3 +135,16 @@ src/
         ├── pay/                           (Phase 30: Local Payments - Fawry, InstaPay, Paymob)
         └── ship/                          (Phase 30: Logistics - Bosta, Aramex)
 ```
+
+├── domains/
+│ ├── page.tsx (Phase 27: The Search Engine Master Page)
+│ └── components/
+│ ├── DomainSearchHero.tsx (Client: Input with 500ms debouncing and Neon Glow)
+│ ├── DomainResults.tsx (Client: Conditional matrix - Taken vs Available + Suggestions)
+│ ├── ExtensionsPricing.tsx (RSC: Grid of .com, .net, .store prices)
+│ └── DomainPerks.tsx (RSC: SSL, WHOIS, DNS features layout)
+├── api/
+│ └── v1/
+│ └── domains/
+│ └── check/
+│ └── route.ts (Phase 27.3: Subdomain/Domain availability & Suggestion generator)
